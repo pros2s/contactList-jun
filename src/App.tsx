@@ -1,19 +1,22 @@
 import { FC } from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useTypedSelector } from './hooks/useTypedSelector';
 
-import Contacts from './pages/Contacts';
-import Login from './pages/Login';
-import NotFound from './pages/NotFound';
+import { privateRoutes, publicRoutes } from './routes/routes';
+import { isAutorizedSelelector } from './store/slices/isAutorized';
 
 
 const App: FC = () => {
+  const { isAutorized } = useTypedSelector(isAutorizedSelelector);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={ <Navigate replace to='/login'/> }/>
-        <Route path='/login' element={ <Login /> }/>
-        <Route path='/contacts' element={ <Contacts /> }/>
-        <Route path='/*' element={ <NotFound /> }/>
+        {
+          isAutorized
+            ? privateRoutes.map(({ path, element }) => <Route path={path} element={element} key={path}/>)
+            : publicRoutes.map(({ path, element }) => <Route path={path} element={element} key={path}/>)
+        }
       </Routes>
     </BrowserRouter>
   );
