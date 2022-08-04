@@ -1,12 +1,13 @@
 import { FC, useEffect } from 'react';
 
 import * as yup from 'yup';
-import { ErrorMessage, Formik } from 'formik';
+import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 import { falseAutorization, trueAutorization } from '../../store/slices/isAutorized';
 
 import './login.scss';
+import InputWithError from '../../components/UI/InputWithError';
 
 interface LoginForm {
   emailInput: string;
@@ -47,29 +48,25 @@ const Login: FC = () => {
         <div className='login'>
           <form className='login__form' onSubmit={handleSubmit}>
             <h1 className='login__title'>Log in</h1>
-            <div className='login__text'>
-              <input
-                maxLength={30}
-                type='email'
-                name='emailInput'
-                placeholder='your email'
-                value={values.emailInput.trim()}
-                onChange={handleChange}
-              />
-              <ErrorMessage component='div' name='emailInput' />
-            </div>
+            <InputWithError
+              className='login__text'
+              maxLength={30}
+              type='email'
+              name='emailInput'
+              placeholder='your email'
+              value={values.emailInput.trim()}
+              onChange={handleChange}
+            />
 
-            <div className='login__text'>
-              <input
-                maxLength={30}
-                type='password'
-                name='passwordInput'
-                placeholder='your password'
-                value={values.passwordInput.trim()}
-                onChange={handleChange}
-              />
-              <ErrorMessage component='div' name='passwordInput' />
-            </div>
+            <InputWithError
+              className='login__text'
+              maxLength={30}
+              type='password'
+              name='passwordInput'
+              placeholder='your password'
+              value={values.passwordInput.trim()}
+              onChange={handleChange}
+            />
 
             <button className='login__submit' type='submit'>
               Let's go
