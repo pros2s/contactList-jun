@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import Contacts from '../pages/Contacts';
 
-import Login from '../pages/Login';
+import Login from '../pages/login/Login';
 import NotFound from '../pages/NotFound';
 
 
