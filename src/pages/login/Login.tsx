@@ -8,7 +8,6 @@ import { falseAutorization, trueAutorization } from '../../store/slices/isAutori
 
 import './login.scss';
 
-
 interface LoginForm {
   emailInput: string;
   passwordInput: string;
@@ -21,6 +20,7 @@ const Login: FC = () => {
   useEffect(() => {
     dispatch(falseAutorization());
   }, [dispatch]);
+
 
   const formValidation = yup.object({
     emailInput: yup
@@ -46,8 +46,8 @@ const Login: FC = () => {
       {({ handleSubmit, values, handleChange }) => (
         <div className='login'>
           <form className='login__form' onSubmit={handleSubmit}>
-            <h1 className="login__title">Log in</h1>
-            <div className="login__text">
+            <h1 className='login__title'>Log in</h1>
+            <div className='login__text'>
               <input
                 maxLength={30}
                 type='email'
@@ -59,7 +59,7 @@ const Login: FC = () => {
               <ErrorMessage component='div' name='emailInput' />
             </div>
 
-            <div className="login__text">
+            <div className='login__text'>
               <input
                 maxLength={30}
                 type='password'
@@ -71,7 +71,9 @@ const Login: FC = () => {
               <ErrorMessage component='div' name='passwordInput' />
             </div>
 
-            <button className='login__submit' type='submit'>Let's go</button>
+            <button className='login__submit' type='submit'>
+              Let's go
+            </button>
           </form>
         </div>
       )}
