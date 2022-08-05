@@ -26,7 +26,7 @@ const InputWithError: FC<InputProps> = ({ name, type, maxLength, placeholder, va
         value={value}
         onChange={onChange}
       />
-      <ErrorMessage component='div' name={name} />
+      <ErrorMessage component='p' name={name} data-testid={name}/>
     </div>
   );
 };
