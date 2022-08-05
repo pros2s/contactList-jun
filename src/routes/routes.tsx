@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-import Contacts from '../pages/Contacts';
+import Contacts from '../pages/contacts/Contacts';
 
 import Login from '../pages/login/Login';
 import NotFound from '../pages/NotFound';

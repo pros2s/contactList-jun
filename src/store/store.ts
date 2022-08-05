@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import {
   persistReducer,
@@ -20,23 +20,28 @@ const persistConfig = {
   storage,
 };
 
-const rootRducer = combineReducers({
-  isAutorizedReducer
+const rootReducer = combineReducers({
+  isAutorizedReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootRducer);
+export const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
+export function store(preloadedState?: PreloadedState<RootState>) {
+  return configureStore({
+    reducer: persistedReducer,
+    preloadedState,
+    middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-});
+  });
+}
 
-export const persistor = persistStore(store);
+export const initStore = store();
+export const persistor = persistStore(initStore);
 
-export type RootState = ReturnType<typeof store.getState>;
-export type TypedDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof store>;
+export type TypedDispatch = AppStore['dispatch'];

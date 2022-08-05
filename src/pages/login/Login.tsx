@@ -5,9 +5,9 @@ import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 import { falseAutorization, trueAutorization } from '../../store/slices/isAutorized';
+import InputWithError from '../../components/UI/inputWithError/InputWithError';
 
 import './login.scss';
-import InputWithError from '../../components/UI/InputWithError';
 
 interface LoginForm {
   emailInput: string;

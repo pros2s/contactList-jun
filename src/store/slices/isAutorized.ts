@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-
 interface IsAutorizedState {
   isAutorized: boolean;
 }
@@ -19,12 +18,11 @@ export const isAutorizedSlice = createSlice({
     },
     falseAutorization(state) {
       state.isAutorized = false;
-    }
+    },
   },
 });
 
 export const isAutorizedSelelector = (state: RootState) => state.isAutorizedReducer;
 export const { trueAutorization, falseAutorization } = isAutorizedSlice.actions;
-
 
 export default isAutorizedSlice.reducer;

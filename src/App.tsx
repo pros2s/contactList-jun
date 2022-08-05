@@ -10,15 +10,17 @@ const App: FC = () => {
   const { isAutorized } = useTypedSelector(isAutorizedSelelector);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {
-          isAutorized
-            ? privateRoutes.map(({ path, element }) => <Route path={path} element={element} key={path}/>)
-            : publicRoutes.map(({ path, element }) => <Route path={path} element={element} key={path}/>)
-        }
-      </Routes>
-    </BrowserRouter>
+    <div data-testid='app'>
+      <BrowserRouter>
+        <Routes>
+          {
+            isAutorized
+              ? privateRoutes.map(({ path, element }) => <Route path={path} element={element} key={path}/>)
+              : publicRoutes.map(({ path, element }) => <Route path={path} element={element} key={path}/>)
+          }
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 };
 
