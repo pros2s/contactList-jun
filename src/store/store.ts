@@ -1,47 +1,27 @@
-import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
-import {
-  persistReducer,
-  persistStore,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 
-import isAutorizedReducer from './slices/isAutorized';
+import createSagaMiddleware from '@redux-saga/core';
+
+import { persistedReducer, rootReducer } from './rootReducer';
+import rootSaga from './sagas';
 
 
-const persistConfig = {
-  key: 'root',
-  version: 1,
-  storage,
-};
+const sagaMiddleware = createSagaMiddleware();
 
-const rootReducer = combineReducers({
-  isAutorizedReducer,
-});
-
-export const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-export function store(preloadedState?: PreloadedState<RootState>) {
-  return configureStore({
-    reducer: persistedReducer,
-    preloadedState,
-    middleware: (getDefaultMiddleware) =>
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
-  });
-}
+    }).concat(sagaMiddleware),
+});
 
-export const initStore = store();
-export const persistor = persistStore(initStore);
+sagaMiddleware.run(rootSaga);
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof store>;
-export type TypedDispatch = AppStore['dispatch'];
+export type TypedDispatch = typeof store.dispatch;

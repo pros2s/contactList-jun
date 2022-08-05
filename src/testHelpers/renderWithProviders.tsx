@@ -8,14 +8,8 @@ import { Provider } from 'react-redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import type { AppStore, RootState } from '../store/store';
+import type { RootState } from '../store/store';
 import isAutorizedReducer from '../store/slices/isAutorized';
-
-
-interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
-  preloadedState?: PreloadedState<RootState>;
-  store?: AppStore;
-}
 
 
 const persistConfig = {
@@ -29,6 +23,12 @@ const rootReducer = combineReducers({
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({ reducer: persistedReducer });
+interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
+  preloadedState?: PreloadedState<RootState>;
+  store?: typeof store;
+}
 
 export function renderWithProviders(
   ui: React.ReactElement,

@@ -3,7 +3,8 @@ import { render as rtlRender } from '@testing-library/react';
 import { JSXElementConstructor, ReactElement } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { persistedReducer } from '../store/store';
+import { persistedReducer } from '../store/rootReducer';
+
 
 interface WrapperProps {
   children?: React.ReactNode;
