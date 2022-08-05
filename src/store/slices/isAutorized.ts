@@ -26,4 +26,5 @@ export const isAutorizedSlice = createSlice({
 export const isAutorizedSelelector = (state: RootState) => state.isAutorizedReducer;
 export const { trueAutorization, falseAutorization } = isAutorizedSlice.actions;
 
+
 export default isAutorizedSlice.reducer;
