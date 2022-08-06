@@ -1,7 +1,7 @@
 interface IContactName {
-  title: string
-  first: string
-  last: string
+  title?: string;
+  first: string;
+  last: string;
 }
 
 interface IContactStreet {
@@ -9,7 +9,7 @@ interface IContactStreet {
 }
 
 interface IContactLocation {
-  location: IContactStreet
+  street: IContactStreet;
 }
 
 interface IContactRegistered {
@@ -24,10 +24,11 @@ interface IContactPicture {
 }
 
 export interface IContact {
+  id: string;
   name: IContactName;
-  location: IContactLocation;
   email: string;
-  registered: IContactRegistered;
-  phone: string;
-  picture: IContactPicture;
+  location?: IContactLocation;
+  registered?: IContactRegistered;
+  phone?: string;
+  picture?: IContactPicture;
 }

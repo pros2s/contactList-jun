@@ -30,11 +30,14 @@ const fetchContactsSlice = createSlice({
       state.loading = false;
       state.error = 'Error with fetch contacts';
     },
+    succesDeletedContact(state, { payload }: PayloadAction<string>) {
+      state.contacts = state.contacts.filter((contact) => contact.id !== payload);
+    }
   },
 });
 
 export const fetchContactsSelector = (state: RootState) => state.fetchContactsReducer;
-export const { failedContacts, fetchContacts, succesContacts } = fetchContactsSlice.actions;
+export const { failedContacts, fetchContacts, succesContacts, succesDeletedContact } = fetchContactsSlice.actions;
 
 
 export default fetchContactsSlice.reducer;

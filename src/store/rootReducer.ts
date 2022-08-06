@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import isAutorizedReducer from './slices/isAutorized';
 import fetchContactsReducer from './slices/fetchContacts';
+import deletedContactReducer from './slices/deleteContact';
 
 
 const persistConfig = {
@@ -14,7 +15,8 @@ const persistConfig = {
 
 export const rootReducer = combineReducers({
   isAutorizedReducer,
-  fetchContactsReducer
+  fetchContactsReducer,
+  deletedContactReducer
 });
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);

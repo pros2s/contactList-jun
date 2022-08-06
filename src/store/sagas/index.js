@@ -1,9 +1,11 @@
 import { all, call, spawn,  } from 'redux-saga/effects';
-import fetchAllContacts from './pageLoader';
+
+import deleteRoot from './deleteContact';
+import requestRoot from './pageLoader';
 
 
 export default function* rootSaga() {
-  const sagas = [fetchAllContacts];
+  const sagas = [requestRoot, deleteRoot];
 
   const repeatSagas = yield sagas.map((saga) => {
     return spawn(function* () {
