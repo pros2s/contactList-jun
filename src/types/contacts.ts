@@ -32,3 +32,14 @@ export interface IContact {
   phone?: string;
   picture?: IContactPicture;
 }
+
+interface AdditingName {
+  first: string,
+  last: string
+}
+
+export interface AdditingValues {
+  email: string;
+  id: string;
+  name: AdditingName
+}

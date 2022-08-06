@@ -11,7 +11,8 @@ export function* requestContacts() {
     const response = yield call(() =>
       callAPI({ url: 'http://localhost:3001/data', method: 'GET' }),
     );
-    yield put(succesContacts(response.data));
+    const copyData = response.data;
+    yield put(succesContacts(copyData.reverse()));
   } catch (e) {
     yield put(failedContacts());
   }
