@@ -6,7 +6,7 @@ import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 import { ADD_NEW_CONTACT, GET_CONTACTS } from '../../store/sagas/sagasHelpers/variables';
 import { setContactNewValues } from '../../store/slices/addContact';
 
-import { AdditingValues } from '../../types/contacts';
+import { NewContactValues } from '../../types/contacts';
 
 
 const AddNewContactMenu: FC = () => {
@@ -18,7 +18,7 @@ const AddNewContactMenu: FC = () => {
   const [emailValue, setEmailValue] = useState<string>('');
 
   const addNewContact = () => {
-    const additingValues: AdditingValues = {
+    const additingValues: NewContactValues = {
       email: emailValue,
       name: {
         first: firstNameValue,
@@ -71,6 +71,5 @@ const AddNewContactMenu: FC = () => {
     </div>
   );
 };
-
 
 export default AddNewContactMenu;

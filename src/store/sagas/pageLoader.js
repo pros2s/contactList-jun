@@ -1,11 +1,11 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, fork, put, takeEvery } from 'redux-saga/effects';
 
 import { failedContacts, fetchContacts, succesContacts } from '../slices/fetchContacts';
 import { GET_CONTACTS } from './sagasHelpers/variables';
 import callAPI from './sagasHelpers/api';
 
 
-export function* requestContacts() {
+function* workerRequestContacts() {
   try {
     yield put(fetchContacts());
     const response = yield call(() =>
@@ -18,6 +18,10 @@ export function* requestContacts() {
   }
 }
 
+function* watcherRequestContacts() {
+  yield takeEvery(GET_CONTACTS, workerRequestContacts);
+}
+
 export default function* requestRoot() {
-  yield takeEvery(GET_CONTACTS, requestContacts);
+  yield fork(watcherRequestContacts);
 }

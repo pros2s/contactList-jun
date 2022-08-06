@@ -1,4 +1,4 @@
-import { call, put, select, takeEvery } from "redux-saga/effects";
+import { call, put, select, takeLatest, fork } from "redux-saga/effects";
 
 import { deletingContacts, failedDeletedContact } from "../slices/deleteContact";
 import { succesDeletedContact } from "../slices/fetchContacts";
@@ -7,7 +7,7 @@ import callAPI from "./sagasHelpers/api";
 import { DELETE_CONTACT } from "./sagasHelpers/variables";
 
 
-export function* deleteContact() {
+export function* workerDeleteContact() {
   try {
     yield put(deletingContacts());
     const { deletedContactReducer } = yield select();
@@ -19,6 +19,10 @@ export function* deleteContact() {
   }
 }
 
+export function* watcherDeleteContact() {
+  yield takeLatest(DELETE_CONTACT, workerDeleteContact);
+}
+
 export default function* deleteRoot() {
-  yield takeEvery(DELETE_CONTACT, deleteContact);
+  yield fork(watcherDeleteContact);
 }

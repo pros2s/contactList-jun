@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../store';
-import { AdditingValues } from '../../types/contacts';
+import { NewContactValues } from '../../types/contacts';
 
 
 interface AddContactState {
-  values: AdditingValues;
+  values: NewContactValues;
   loading: boolean;
   error: string;
 }
@@ -30,7 +30,7 @@ const addContactSlice = createSlice({
     additingContact(state) {
       state.loading = true;
     },
-    setContactNewValues(state, { payload }: PayloadAction<AdditingValues>) {
+    setContactNewValues(state, { payload }: PayloadAction<NewContactValues>) {
       state.loading = false;
       state.values = payload;
     },

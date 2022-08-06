@@ -27,10 +27,11 @@ const ContactList: FC = () => {
 
       <h1>{contacts.length}</h1>
       {
-        contacts.map((contact) => <ContactItem
-          key={contact.id}
-          contact={contact}
-          deleteContact={deleteContact}/>)
+        contacts.map((contact) =>
+          <ContactItem
+            key={contact.id}
+            contact={contact}
+            deleteContact={deleteContact}/>)
       }
     </div>
   );

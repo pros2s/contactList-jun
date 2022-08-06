@@ -33,13 +33,13 @@ export interface IContact {
   picture?: IContactPicture;
 }
 
-interface AdditingName {
+interface NewContactName {
   first: string,
   last: string
 }
 
-export interface AdditingValues {
+export interface NewContactValues {
   email: string;
   id: string;
-  name: AdditingName
+  name: NewContactName
 }
