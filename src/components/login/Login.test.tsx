@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndProviders } from '../../testHelpers/renderWithRouterAndProviders';
-import Login from './Login';
+import Login from '../../pages/login/Login';
 
 
 describe('Login', () => {

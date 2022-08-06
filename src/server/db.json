@@ -390,39 +390,6 @@
         "medium": "https://randomuser.me/api/portraits/med/women/27.jpg",
         "thumbnail": "https://randomuser.me/api/portraits/thumb/women/27.jpg"
       }
-    },
-    {
-      "id": "0pJMCt-Q9YdHfmxgwO-2M",
-      "name": {
-        "title": "Mr",
-        "first": "Woldemar",
-        "last": "Hommel"
-      },
-      "location": "Neue Straße",
-      "email": "woldemar.hommel@example.com",
-      "age": 19,
-      "phone": "0629-1937984",
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/men/68.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/men/68.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/68.jpg"
-      }
-    },
-    {
-      "email": "sldkfj@sldkfj.ru",
-      "name": {
-        "first": "sdfasdf",
-        "last": "lsdkfj"
-      },
-      "id": "_63yK2coDrtvEfXZ3P9Vt"
-    },
-    {
-      "email": "newemail@ldkjf.ru",
-      "name": {
-        "first": "new",
-        "last": "newlast"
-      },
-      "id": "udAYnoOqiZC2QcJelyy7D"
     }
   ]
 }
