@@ -7,6 +7,8 @@ import NewDataForm, { NewData } from '../UI/NewDataForm';
 
 import '../addNewContactMenu/addNewContactMenu.scss';
 
+import './contactItem.scss';
+
 
 interface ContactItemProps {
   contact: IContact;
@@ -15,7 +17,6 @@ interface ContactItemProps {
 
 const ContactItem: FC<ContactItemProps> = ({ contact, deleteContact }) => {
   const [editing, setEditing] = useState<boolean>(false);
-
 
   const { email, id, name, age, location, phone, picture } = contact;
 
@@ -30,34 +31,37 @@ const ContactItem: FC<ContactItemProps> = ({ contact, deleteContact }) => {
     phone,
   };
 
-
   return (
-    <div style={{ display: 'flex' }}>
-      <img src={picture?.thumbnail} alt='contactAvatar' />
-      <div>
-        <p>{`${contactTitle} ${name?.first} ${name?.last}`}</p>
-        <p>email: {email}</p>
-        <p>address: {location}</p>
-        <p>phone number: {phone}</p>
-        <p>age: {age && age > 0 && age}</p>
+    <div className='contact'>
+      <div className="contact__data">
+        <img className='contact__data-img' src={picture?.large} alt='contactAvatar' />
+        <div className='contact__data-info'>
+          <h3>{`${contactTitle} ${name?.first} ${name?.last}`}</h3>
+          <p>email: {email}</p>
+          <p>address: {location}</p>
+          <p>phone number: {phone}</p>
+          <p>age: {age && age > 0 && age}</p>
+        </div>
       </div>
 
-      <button onClick={() => deleteContact(id)} style={{ height: 30 }}>
-        don't delete me, bruh
-      </button>
+      <div className="contact__crud">
+        {editing ? (
+          <div className='new-data-background' onClick={() => setEditing(false)}>
+            <NewDataForm
+              contactId={id}
+              payloadType={EDIT_CONTACT}
+              setViewForm={setEditing}
+              initialValues={initialValues}
+            />
+          </div>
+        ) : (
+          <button className="contact__crud-edit"  onClick={() => setEditing(true)}>edit</button>
+        )}
 
-      {editing ? (
-        <div className='new-data-background' onClick={() => setEditing(false)}>
-          <NewDataForm
-            contactId={id}
-            payloadType={EDIT_CONTACT}
-            setViewForm={setEditing}
-            initialValues={initialValues}
-          />
-        </div>
-      ) : (
-        <button onClick={() => setEditing(true)}>u gonna edit me?</button>
-      )}
+        <button className="contact__crud-delete" onClick={() => deleteContact(id)} style={{ height: 30 }}>
+          delete
+        </button>
+      </div>
     </div>
   );
 };

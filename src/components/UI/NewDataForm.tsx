@@ -149,7 +149,7 @@ const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId, in
                 min='0'
                 max='200'
                 name='age'
-                placeholder='set new age'
+                placeholder='set new age*'
                 value={values.age}
                 onChange={handleChange}
               />

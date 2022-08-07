@@ -1,0 +1,73 @@
+.contact,
+.contact__data,
+.contact__crud {
+  display: flex;
+}
+
+.contact {
+  justify-content: space-between;
+
+  border: 2px solid #fff;
+  border-radius: 10px;
+
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.contact__crud {
+  max-height: 29px;
+}
+
+.contact__crud-delete {
+  padding: 5px 20px;
+  
+  border: 1px solid #ff1010;
+  border-radius: 10px;
+
+  background: transparent;
+
+  line-height: 1;
+  color: #ff1010;
+
+  transition: all .1s linear;
+
+  &:hover {
+    background: #ff1010;
+    color: #fff;
+  }
+}
+
+.contact__crud-edit {
+  padding: 5px 20px;
+  margin-right: 10px;
+
+  border: 1px solid #10cfff;
+  border-radius: 10px;
+
+  background: transparent;
+
+  line-height: 1;
+  color: #10cfff;
+
+  transition: all .1s linear;
+
+  &:hover {
+    background: #10cfff;
+    color: #fff;
+  }
+}
+
+.contact__data-img {
+  border-radius: 10px;
+}
+
+.contact__data-info {
+  margin-left: 20px;
+
+  color: #fff;
+
+  h3 {
+    margin: 0;
+    margin-bottom: 5px;
+  }
+}

@@ -16,7 +16,7 @@ const AddNewContactMenu: FC = () => {
 
 
   const initialValues: NewData = {
-    age: -1,
+    age: 0,
     email: '',
     firstName: '',
     lastName: '',
