@@ -10,6 +10,7 @@ import { DELETE_CONTACT } from '../../store/sagas/sagasHelpers/variables';
 
 import ContactItem from '../contactItem/ContactItem';
 
+
 const ContactList: FC = () => {
   const { contacts, loading } = useTypedSelector(fetchContactsSelector);
   const { searchData } = useTypedSelector(searchDataSelector);
@@ -46,5 +47,6 @@ const ContactList: FC = () => {
     </div>
   );
 };
+
 
 export default ContactList;

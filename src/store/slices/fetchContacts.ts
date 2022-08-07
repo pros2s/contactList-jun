@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IContact } from '../../types/contacts';
 import { RootState } from '../store';
 
+
 interface FetchContactsState {
   contacts: IContact[];
   loading: boolean;

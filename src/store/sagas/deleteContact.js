@@ -23,6 +23,7 @@ export function* watcherDeleteContact() {
   yield takeLatest(DELETE_CONTACT, workerDeleteContact);
 }
 
+
 export default function* deleteRoot() {
   yield fork(watcherDeleteContact);
 }

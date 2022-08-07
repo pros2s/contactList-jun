@@ -30,14 +30,14 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   store?: typeof store;
 }
 
-export function renderWithProviders(
+export const renderWithProviders = (
   ui: React.ReactElement,
   {
     preloadedState = {},
     store = configureStore({ reducer: persistedReducer, preloadedState }),
     ...renderOptions
   }: ExtendedRenderOptions = {},
-) {
+) => {
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return <Provider store={store}>{children}</Provider>;
   }

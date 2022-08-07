@@ -10,10 +10,10 @@ interface WrapperProps {
   children?: React.ReactNode;
 }
 
-export function renderWithRouterAndProviders(
+export const renderWithRouterAndProviders = (
   ui: ReactElement<any, string | JSXElementConstructor<any>>,
   { route = '/', initialState = {} } = {},
-) {
+) => {
   window.history.pushState({}, 'Test page', route);
   const store = configureStore({ reducer: persistedReducer, preloadedState: initialState });
 

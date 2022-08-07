@@ -5,6 +5,7 @@ import { EDIT_CONTACT } from '../../store/sagas/sagasHelpers/variables';
 import { IContact } from '../../types/contacts';
 import NewDataForm from '../UI/NewDataForm';
 
+
 interface ContactItemProps {
   contact: IContact;
   deleteContact: (id: string) => void;
@@ -40,5 +41,6 @@ const ContactItem: FC<ContactItemProps> = ({ contact, deleteContact }) => {
     </div>
   );
 };
+
 
 export default ContactItem;

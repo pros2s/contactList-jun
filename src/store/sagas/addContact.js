@@ -27,6 +27,7 @@ function* watcherAddContact() {
   yield takeEvery(ADD_NEW_CONTACT, workerAddContact);
 }
 
+
 export default function* addRoot() {
   yield fork(watcherAddContact);
 }

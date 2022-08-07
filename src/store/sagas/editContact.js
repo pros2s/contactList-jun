@@ -27,6 +27,7 @@ function* watcherEditContact() {
   yield takeEvery(EDIT_CONTACT, workerEditContact);
 }
 
+
 export default function* editRoot() {
   yield fork(watcherEditContact);
 }

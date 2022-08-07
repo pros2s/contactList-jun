@@ -22,6 +22,7 @@ function* watcherRequestContacts() {
   yield takeEvery(GET_CONTACTS, workerRequestContacts);
 }
 
+
 export default function* requestRoot() {
   yield fork(watcherRequestContacts);
 }
