@@ -1,11 +1,12 @@
 .pagination {
   display: flex;
   justify-content: flex-end;
+  
   width: 275px;
+  margin-left: auto;
+  margin-top: 28px;
 
   list-style: none;
-  margin-left: auto;
-
   color: #fff;
 }
 

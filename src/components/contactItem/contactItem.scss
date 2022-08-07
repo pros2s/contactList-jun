@@ -18,6 +18,13 @@
 
 .contact__crud {
   max-height: 29px;
+
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  @media screen and (max-width: 600px) {
+    width: 100px;
+  }
 }
 
 .contact__crud-delete {
@@ -55,10 +62,30 @@
   font-weight: 600;
 
   transition: all 0.1s linear;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  @media screen and (max-width: 400px) {
+    margin-right: 0;
+    width: 70px;
+    padding: 5px 0;
+  }
 }
 
 .contact__data-img {
   border-radius: 10px;
+
+  @media screen and (max-width: 530px) {
+    width: 100px;
+    height: 100px;
+  }
+
+  @media screen and (max-width: 530px) {
+    display: none;
+  }
 }
 
 .contact__data-info {
@@ -69,5 +96,9 @@
   h3 {
     margin: 0;
     margin-bottom: 5px;
+  }
+
+  @media screen and (max-width: 400px) {
+    margin-left: 0;
   }
 }

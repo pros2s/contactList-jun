@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useRef } from 'react';
+import { FC, memo, useRef } from 'react';
 import { Params, useNavigate, useParams } from 'react-router-dom';
 
 import { useTypedDispatch } from '../../../hooks/useTypedDispatch';
@@ -18,10 +18,6 @@ const PageButton: FC<PageButtonProps> = memo(({ page, arrLength, index }) => {
 
   const navigate = useNavigate();
   const { id }: Params<string> = useParams();
-
-  useEffect(() => {
-    id && dispatch(setCurrentPage(id));
-  }, [id, dispatch]);
 
 
   const revertedPage = +page - arrLength + (2 * index + 1);

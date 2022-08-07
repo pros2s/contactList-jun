@@ -10,7 +10,7 @@
 
   input {
     margin-left: 10px;
-    
+
     background: transparent;
     border: none;
     outline: none;
@@ -19,6 +19,10 @@
 
     &::placeholder {
       color: #fff;
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 70px;
     }
   }
 

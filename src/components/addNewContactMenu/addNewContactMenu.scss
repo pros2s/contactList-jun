@@ -2,6 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  svg {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 .new-data__add {
@@ -42,6 +47,12 @@
     position: absolute;
     top: 100%;
     color: #ff1010;
+  }
+
+  @media screen and (max-width: 400px) {
+    p {
+      display: none;
+    }
   }
 }
 
@@ -86,6 +97,10 @@
       color: #fff;
       font-weight: 300;
     }
+  }
+
+  @media screen and (max-width: 410px) {
+    width: 333px;
   }
 }
 
