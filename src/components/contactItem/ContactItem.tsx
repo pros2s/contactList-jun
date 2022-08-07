@@ -14,7 +14,6 @@ interface ContactItemProps {
 const ContactItem: FC<ContactItemProps> = ({ contact, deleteContact }) => {
   const [editing, setEditing] = useState<boolean>(false);
 
-
   return (
     <div style={{ display: 'flex' }}>
       <img src={contact.picture?.thumbnail} alt='contactAvatar' />

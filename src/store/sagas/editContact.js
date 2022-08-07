@@ -2,7 +2,7 @@ import { call, fork, put, select, takeEvery } from 'redux-saga/effects';
 import { editingContacts, failedEditedContact } from '../slices/editContact';
 
 import callAPI from './sagasHelpers/api';
-import { EDIT_CONTACT } from './sagasHelpers/variables';
+import { EDIT_CONTACT, GET_CONTACTS } from './sagasHelpers/variables';
 
 
 function* workerEditContact() {
@@ -16,6 +16,7 @@ function* workerEditContact() {
         data: editContactReducer.editedData,
       }),
     );
+    yield put({ type: GET_CONTACTS });
   } catch (e) {
     console.log(e);
     yield put(failedEditedContact());

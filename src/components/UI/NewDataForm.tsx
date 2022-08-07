@@ -8,7 +8,7 @@ import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 import { setEditedContactId, setEditedContactValues } from '../../store/slices/editContact';
 import { setContactNewValues } from '../../store/slices/addContact';
 
-import { ADD_NEW_CONTACT, EDIT_CONTACT, GET_CONTACTS } from '../../store/sagas/sagasHelpers/variables';
+import { ADD_NEW_CONTACT, EDIT_CONTACT } from '../../store/sagas/sagasHelpers/variables';
 import InputWithError from './InputWithError';
 
 
@@ -22,9 +22,10 @@ interface NewDataProps {
   payloadType: string;
   setViewForm: React.Dispatch<React.SetStateAction<boolean>>;
   contactId?: string;
+  formName: string;
 }
 
-const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId }) => {
+const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId, formName }) => {
   const dispatch = useTypedDispatch();
 
   const formValidation = yup.object({
@@ -53,7 +54,6 @@ const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId }) 
       dispatch(setContactNewValues(newValues));
     }
     dispatch({ type: payloadType });
-    dispatch({ type: GET_CONTACTS });
 
     setViewForm(false);
   };
@@ -68,13 +68,17 @@ const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId }) 
         }}
         validationSchema={formValidation}
         onSubmit={(values, { resetForm }) => {
-          addNewData(values.firstName, values.lastName, values.email, (contactId = ''));
+          addNewData(
+            values.firstName,
+            values.lastName,
+            values.email,
+            (contactId = contactId || ''),
+          );
           resetForm();
         }}>
         {({ handleSubmit, values, handleChange }) => (
           <div>
             <form onSubmit={handleSubmit}>
-              <h1>Log in</h1>
               <InputWithError
                 maxLength={30}
                 type='text'
@@ -102,7 +106,7 @@ const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId }) 
                 onChange={handleChange}
               />
 
-              <button type='submit'>Edit</button>
+              <button type='submit'>{formName}</button>
             </form>
           </div>
         )}
