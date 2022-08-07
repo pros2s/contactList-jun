@@ -5,9 +5,9 @@ interface IContactName {
 }
 
 interface IContactPicture {
-  large: string;
-  medium: string;
-  thumbnail: string;
+  large?: string;
+  medium?: string;
+  thumbnail?: string;
 }
 
 export interface IContact {

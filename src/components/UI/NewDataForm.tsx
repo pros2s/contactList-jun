@@ -15,6 +15,7 @@ import { ADD_NEW_CONTACT, EDIT_CONTACT } from '../../store/sagas/sagasHelpers/va
 import InputWithError from './InputWithError';
 
 import '../addNewContactMenu/addNewContactMenu.scss';
+import picture from '../../assets/contact.png';
 
 
 export interface NewData {
@@ -63,6 +64,9 @@ const NewDataForm: FC<NewDataProps> = memo(({ payloadType, setViewForm, contactI
       },
       age,
       location,
+      picture: {
+        large: picture
+      },
       phone,
       id: nanoid(),
     };
