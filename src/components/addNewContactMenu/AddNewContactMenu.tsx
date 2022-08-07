@@ -20,16 +20,11 @@ const AddNewContactMenu: FC = () => {
   const { error, loading } = useTypedSelector(addedContactSelector);
 
   const [addition, setAddition] = useState<boolean>(false);
-  const [addError, setAddError] = useState<boolean>(false);
   const [aLotOfPages, setALotOfPages] = useState<boolean>(false);
 
   useEffect(() => {
     document.body.style.overflow = addition ? 'hidden' : '';
   }, [addition]);
-
-  useEffect(() => {
-    error && setAddError(true);
-  }, [error]);
 
 
   const initialValues: NewData = {
@@ -49,11 +44,6 @@ const AddNewContactMenu: FC = () => {
     }, 3000);
   };
 
-  const deleteError = () => {
-    dispatch(resetAdditinError());
-    setAddError(false);
-  };
-
 
   return (
     <>
@@ -71,8 +61,8 @@ const AddNewContactMenu: FC = () => {
           </button>
         )}
 
-        {addError && <ErrorMini message='Error with additing new contact' />}
-        {addError && <RiCloseLine onClick={() => deleteError()} />}
+        {error && <ErrorMini message='Error with additing new contact' />}
+        {error && <RiCloseLine onClick={() => dispatch(resetAdditinError())} />}
       </div>
 
       {addition && (

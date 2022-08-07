@@ -6,14 +6,14 @@ import { RootState } from '../store';
 interface EditContactState {
   editedData: IContact | null;
   loading: boolean;
-  id: string;
+  editedId: string;
   error: string;
 }
 
 const initialState: EditContactState = {
   editedData: null,
   loading: false,
-  id: '',
+  editedId: '',
   error: '',
 };
 
@@ -25,17 +25,22 @@ const editContactSlice = createSlice({
       state.loading = true;
     },
     setEditedContactId(state, { payload }: PayloadAction<string>) {
-      state.loading = false;
-      state.error = '';
-      state.id = payload;
+      state.editedId = payload;
     },
     setEditedContactValues(state, { payload }: PayloadAction<IContact>) {
       state.loading = false;
       state.error = '';
       state.editedData = payload;
     },
+    endOfEditingContact(state) {
+      state.loading = false;
+    },
     failedEditedContact(state) {
       state.error = 'Error with editing contact';
+      state.loading = false;
+    },
+    resetError(state) {
+      state.error = '';
     },
   },
 });
@@ -45,7 +50,8 @@ export const {
   editingContacts,
   failedEditedContact,
   setEditedContactId,
-  setEditedContactValues
+  setEditedContactValues,
+  resetError
 } = editContactSlice.actions;
 
 

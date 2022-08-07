@@ -8,6 +8,12 @@ import NewDataForm, { NewData } from '../UI/NewDataForm';
 import '../addNewContactMenu/addNewContactMenu.scss';
 
 import './contactItem.scss';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { editedContactSelector, resetError } from '../../store/slices/editContact';
+import Loader from '../UI/loader/Loader';
+import ErrorMini from '../UI/errors/errorMini/ErrorMini';
+import { RiCloseLine } from 'react-icons/ri';
+import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 
 
 interface ContactItemProps {
@@ -16,12 +22,15 @@ interface ContactItemProps {
 }
 
 const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
+  const dispatch = useTypedDispatch();
+  const { loading, error, editedId } = useTypedSelector(editedContactSelector);
   const [editing, setEditing] = useState<boolean>(false);
 
   useEffect(() => {
     document.body.style.overflow = editing ? 'hidden' : '';
   }, [editing]);
 
+  
   const { email, id, name, age, location, phone, picture } = contact;
 
   const contactTitle = name.title ? `${name.title}.` : '';
@@ -51,10 +60,15 @@ const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
         </div>
 
         <div className='contact__crud'>
-
-          <button className='contact__crud-edit' onClick={() => setEditing(true)}>
-              edit {editing}
-          </button>
+          {loading ? (
+            <Loader width='20' info='Loading edit contact' />
+          ) : (
+            <button className='contact__crud-edit' onClick={() => setEditing(true)}>
+              edit
+            </button>
+          )}
+          {error && id === editedId && <ErrorMini message='Error with edit contact' />}
+          {error && id === editedId && <RiCloseLine onClick={() => dispatch(resetError())} />}
 
           <button
             className='contact__crud-delete'
