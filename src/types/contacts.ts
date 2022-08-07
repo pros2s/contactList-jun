@@ -4,14 +4,6 @@ interface IContactName {
   last: string;
 }
 
-interface IContactStreet {
-  name: string;
-}
-
-interface IContactLocation {
-  street: IContactStreet;
-}
-
 interface IContactRegistered {
   age: number;
   date: string;
@@ -27,10 +19,11 @@ export interface IContact {
   id: string;
   name: IContactName;
   email: string;
-  location?: IContactLocation;
+  location?: string;
   registered?: IContactRegistered;
   phone?: string;
   picture?: IContactPicture;
+  age?: number;
 }
 
 interface NewContactName {

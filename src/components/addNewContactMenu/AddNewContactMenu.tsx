@@ -12,7 +12,7 @@ const AddNewContactMenu: FC = () => {
     <div>
       {addition ? (
         <div>
-          <NewDataForm payloadType={ADD_NEW_CONTACT} setViewForm={setAddition} />
+          <NewDataForm payloadType={ADD_NEW_CONTACT} setViewForm={setAddition} formName='Add'/>
         </div>
       ) : (
         <button onClick={() => setAddition(true)}>Add new Contact</button>

@@ -7,6 +7,7 @@ import fetchContactsReducer from './slices/fetchContacts';
 import deletedContactReducer from './slices/deleteContact';
 import addContactReducer from './slices/addContact';
 import editContactReducer from './slices/editContact';
+import searchDataReducer from './slices/search';
 
 
 const persistConfig = {
@@ -20,7 +21,8 @@ export const rootReducer = combineReducers({
   fetchContactsReducer,
   deletedContactReducer,
   addContactReducer,
-  editContactReducer
+  editContactReducer,
+  searchDataReducer
 });
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);
