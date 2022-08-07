@@ -4,7 +4,7 @@ interface IContactName {
   last: string;
 }
 
-interface IContactPicture {
+export interface IContactPicture {
   large?: string;
   medium?: string;
   thumbnail?: string;

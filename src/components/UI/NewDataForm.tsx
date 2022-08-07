@@ -45,6 +45,7 @@ const NewDataForm: FC<NewDataProps> = memo(({ payloadType, setViewForm, contactI
 
     lastName: yup.string().required('Not required').max(15, 'Maximum 15 symbols'),
     firstName: yup.string().required('Not required').max(15, 'Maximum 15 symbols'),
+    phone: yup.string().matches(/[0-9]{3}-[0-9]{3}-[0-9]{4}/, 'Format phone number: 123-456-7890')
   });
 
   const addNewData = (
@@ -64,12 +65,13 @@ const NewDataForm: FC<NewDataProps> = memo(({ payloadType, setViewForm, contactI
       },
       age,
       location,
-      picture: {
-        large: picture
-      },
       phone,
       id: nanoid(),
     };
+    if (payloadType === ADD_NEW_CONTACT) {
+      newValues.picture = { large: picture };
+    }
+    
     if (payloadType === EDIT_CONTACT) {
       dispatch(setEditedContactId(contactId));
       dispatch(setEditedContactValues(newValues));
