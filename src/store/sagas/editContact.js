@@ -1,4 +1,4 @@
-import { call, fork, put, select, takeLatest } from 'redux-saga/effects';
+import { call, fork, put, select, takeEvery } from 'redux-saga/effects';
 import { editingContacts, failedEditedContact } from '../slices/editContact';
 
 import callAPI from './sagasHelpers/api';
@@ -23,7 +23,7 @@ function* workerEditContact() {
 }
 
 function* watcherEditContact() {
-  yield takeLatest(EDIT_CONTACT, workerEditContact);
+  yield takeEvery(EDIT_CONTACT, workerEditContact);
 }
 
 export default function* editRoot() {
