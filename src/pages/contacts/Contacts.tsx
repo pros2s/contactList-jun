@@ -1,6 +1,8 @@
 import { FC, useEffect } from 'react';
+
 import AddNewContactMenu from '../../components/addNewContactMenu/AddNewContactMenu';
 import ContactList from '../../components/contactList/ContactList';
+import Pagination from '../../components/UI/pagination/Pagination';
 import Search from '../../components/UI/search/Search';
 
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
@@ -17,7 +19,6 @@ const Contacts: FC = () => {
     dispatch({ type: GET_CONTACTS });
   }, [dispatch]);
 
-
   return (
     <div className='contact-page'>
       <div className='contact-page__inner'>
@@ -26,6 +27,9 @@ const Contacts: FC = () => {
           <Search />
         </header>
         <ContactList />
+        <footer>
+          <Pagination />
+        </footer>
       </div>
     </div>
   );

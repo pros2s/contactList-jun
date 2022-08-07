@@ -1,23 +1,6 @@
 {
   "data": [
     {
-      "id": "djL7dwXn2Gmtad0h-rZOW",
-      "name": {
-        "title": "Ms",
-        "first": "Josefine",
-        "last": "Madsen"
-      },
-      "location": "Østerbro",
-      "email": "josefine.madsen@example.com",
-      "age": 14,
-      "phone": "36893575",
-      "picture": {
-        "large": "https://randomuser.me/api/portraits/women/33.jpg",
-        "medium": "https://randomuser.me/api/portraits/med/women/33.jpg",
-        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/33.jpg"
-      }
-    },
-    {
       "id": "ZlhYz1x719QLu--wSTy1Z",
       "name": {
         "title": "Mr",
@@ -383,23 +366,12 @@
       "location": "E Pecan St",
       "email": "lskdjf@jlsdfj.ru",
       "age": 11,
-      "phone": "200-781-7346",
+      "phone": "(200) 781-7346",
       "picture": {
         "large": "https://randomuser.me/api/portraits/women/27.jpg",
         "medium": "https://randomuser.me/api/portraits/med/women/27.jpg",
         "thumbnail": "https://randomuser.me/api/portraits/thumb/women/27.jpg"
       }
-    },
-    {
-      "email": "sdf@slsddffdfdflf.ru",
-      "name": {
-        "first": "sffffffffff",
-        "last": "sdfssssss"
-      },
-      "age": 10,
-      "location": "",
-      "phone": "",
-      "id": "LWCL4Ktjb32WLaPmyaMS-"
     }
   ]
 }

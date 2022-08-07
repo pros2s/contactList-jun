@@ -31,9 +31,10 @@ const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
     phone,
   };
 
+
   return (
     <div className='contact'>
-      <div className="contact__data">
+      <div className='contact__data'>
         <img className='contact__data-img' src={picture?.large} alt='contactAvatar' />
         <div className='contact__data-info'>
           <h3>{`${contactTitle} ${name?.first} ${name?.last}`}</h3>
@@ -44,7 +45,7 @@ const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
         </div>
       </div>
 
-      <div className="contact__crud">
+      <div className='contact__crud'>
         {editing ? (
           <div className='new-data-background' onClick={() => setEditing(false)}>
             <NewDataForm
@@ -55,10 +56,15 @@ const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
             />
           </div>
         ) : (
-          <button className="contact__crud-edit"  onClick={() => setEditing(true)}>edit</button>
+          <button className='contact__crud-edit' onClick={() => setEditing(true)}>
+            edit
+          </button>
         )}
 
-        <button className="contact__crud-delete" onClick={() => deleteContact(id)} style={{ height: 30 }}>
+        <button
+          className='contact__crud-delete'
+          onClick={() => deleteContact(id)}
+          style={{ height: 30 }}>
           delete
         </button>
       </div>

@@ -1,3 +1,13 @@
+.new-data {
+  position: relative;
+
+  .new-data__aLotOf-pages {
+    position: absolute;
+    top: 94%;
+    color: #ff1010;
+  }
+}
+
 .new-data__add {
   display: flex;
 
@@ -49,8 +59,7 @@
   padding-bottom: 12px;
   width: 400px;
 
-  background-color: blur(83px);
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(20px);
 
   border: 2px solid #fff;
   border-radius: 10px;

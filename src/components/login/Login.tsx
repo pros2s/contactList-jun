@@ -39,7 +39,7 @@ const Login: FC = () => {
       }}
       validationSchema={formValidation}
       onSubmit={(_, { resetForm }) => {
-        route(`/contacts`);
+        route(`/contacts/1`);
         dispatch(trueAutorization());
         resetForm();
       }}>
