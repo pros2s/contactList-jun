@@ -1,18 +1,11 @@
 .new-data {
   position: relative;
 
-  .new-data__aLotOf-pages {
-    position: absolute;
-    top: 94%;
-    color: #ff1010;
-  }
-}
-
-.new-data__add {
   display: flex;
 
   border: 2px solid lime;
   border-radius: 10px;
+  background-color: transparent;
 
   padding: 5px 10px;
 
@@ -38,6 +31,12 @@
     background-color: #00d700;
     color: #fff;
   }
+
+  .new-data__aLotOf-pages {
+    position: absolute;
+    top: 100%;
+    color: #ff1010;
+  }
 }
 
 .new-data-background {
@@ -61,7 +60,7 @@
 
   backdrop-filter: blur(20px);
 
-  border: 2px solid #fff;
+  box-shadow: -1px -1px 26px 2px rgb(0 0 0 / 40%);
   border-radius: 10px;
 
   input {

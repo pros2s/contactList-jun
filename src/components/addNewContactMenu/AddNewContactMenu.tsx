@@ -10,7 +10,7 @@ import './addNewContactMenu.scss';
 
 
 const AddNewContactMenu: FC = () => {
-  const { totalPages, contacts } = useTypedSelector(fetchContactsSelector);
+  const { totalPages } = useTypedSelector(fetchContactsSelector);
 
   const [addition, setAddition] = useState<boolean>(false);
   const [aLotOfPages, setALotOfPages] = useState<boolean>(false);
@@ -30,7 +30,7 @@ const AddNewContactMenu: FC = () => {
   };
 
   const onClickAddNewContact = () => {
-    totalPages < 8 && contacts.length !== 5 ? setAddition(true) : setALotOfPages(true);
+    totalPages < 7 ? setAddition(true) : setALotOfPages(true);
 
     setTimeout(() => {
       setALotOfPages(false);
@@ -39,7 +39,13 @@ const AddNewContactMenu: FC = () => {
 
 
   return (
-    <div className='new-data'>
+    <>
+      <button data-testid='addNewContact' className='new-data' onClick={() => onClickAddNewContact()}>
+        <RiAddLine />
+        <button>Add new Contact</button>
+        {aLotOfPages && <p className='new-data__aLotOf-pages'>Too much pages</p>}
+      </button>
+
       {addition && (
         <div className='new-data-background' onClick={() => setAddition(false)}>
           <NewDataForm
@@ -49,14 +55,7 @@ const AddNewContactMenu: FC = () => {
           />
         </div>
       )}
-
-      <div className='new-data__add'>
-        <RiAddLine />
-        <button onClick={() => onClickAddNewContact()}>Add new Contact</button>
-      </div>
-
-      {aLotOfPages && <p className='new-data__aLotOf-pages'>Too much pages</p>}
-    </div>
+    </>
   );
 };
 

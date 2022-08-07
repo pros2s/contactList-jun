@@ -11,6 +11,7 @@ import { DELETE_CONTACT } from '../../store/sagas/sagasHelpers/variables';
 import ContactItem from '../contactItem/ContactItem';
 
 import './contactList.scss';
+import Loader from '../UI/loader/Loader';
 
 
 const ContactList: FC = () => {
@@ -42,11 +43,11 @@ const ContactList: FC = () => {
 
   return (
     <div className='contacts'>
-      {loading && <p>Loading...</p>}
-
-      {searchedContacts.map((contact) => (
-        <ContactItem key={contact.id} contact={contact} deleteContact={deleteContact} />
-      ))}
+      {loading ? <Loader info='Loading Contacts'/> :
+        searchedContacts.map((contact) => (
+          <ContactItem key={contact.id} contact={contact} deleteContact={deleteContact} />
+        ))
+      }
     </div>
   );
 };

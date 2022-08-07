@@ -7,11 +7,13 @@
 .contact {
   justify-content: space-between;
 
-  border: 2px solid #fff;
   border-radius: 10px;
 
   padding: 8px;
   margin-bottom: 10px;
+
+  backdrop-filter: blur(50px);
+  box-shadow: -1px -1px 26px 2px rgb(0 0 0 / 40%);
 }
 
 .contact__crud {
@@ -19,17 +21,9 @@
 }
 
 .contact__crud-delete {
-  padding: 5px 20px;
+  border: 2px solid #ff1010;
 
-  border: 1px solid #ff1010;
-  border-radius: 10px;
-
-  background: transparent;
-
-  line-height: 1;
   color: #ff1010;
-
-  transition: all 0.1s linear;
 
   &:hover {
     background: #ff1010;
@@ -38,23 +32,29 @@
 }
 
 .contact__crud-edit {
-  padding: 5px 20px;
-  margin-right: 10px;
+  border: 2px solid #10cfff;
 
-  border: 1px solid #10cfff;
-  border-radius: 10px;
-
-  background: transparent;
-
-  line-height: 1;
   color: #10cfff;
-
-  transition: all 0.1s linear;
 
   &:hover {
     background: #10cfff;
     color: #fff;
   }
+}
+
+.contact__crud-delete,
+.contact__crud-edit {
+  padding: 5px 20px;
+  margin-right: 10px;
+
+  border-radius: 10px;
+
+  background: transparent;
+
+  line-height: 1;
+  font-weight: 600;
+
+  transition: all 0.1s linear;
 }
 
 .contact__data-img {
