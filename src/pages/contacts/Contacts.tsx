@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import AddNewContactMenu from '../../components/addNewContactMenu/AddNewContactMenu';
 import ContactList from '../../components/contactList/ContactList';
-import Search from '../../components/UI/Search';
+import Search from '../../components/UI/search/Search';
 
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 

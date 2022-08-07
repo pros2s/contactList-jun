@@ -1,0 +1,29 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid #fff;
+  border-radius: 10px;
+
+  color: #fff;
+
+  input {
+    margin-left: 10px;
+    
+    background: transparent;
+    border: none;
+    outline: none;
+
+    color: #fff;
+
+    &::placeholder {
+      color: #fff;
+    }
+  }
+
+  svg {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+}
