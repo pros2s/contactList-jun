@@ -39,7 +39,7 @@ const editContactSlice = createSlice({
       state.error = 'Error with editing contact';
       state.loading = false;
     },
-    resetError(state) {
+    resetEditingError(state) {
       state.error = '';
     },
   },
@@ -51,7 +51,8 @@ export const {
   failedEditedContact,
   setEditedContactId,
   setEditedContactValues,
-  resetError
+  resetEditingError,
+  endOfEditingContact,
 } = editContactSlice.actions;
 
 

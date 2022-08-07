@@ -37,9 +37,6 @@ const fetchContactsSlice = createSlice({
       state.loading = false;
       state.error = 'Error with fetch contacts';
     },
-    succesDeletedContact(state, { payload }: PayloadAction<string>) {
-      state.contacts = state.contacts.filter((contact) => contact.id !== payload);
-    },
     setTotalContacts(state, { payload }: PayloadAction<number>) {
       state.totalContacts = payload;
     },
@@ -57,7 +54,6 @@ export const {
   failedContacts,
   fetchContacts,
   succesContacts,
-  succesDeletedContact,
   setTotalContacts,
   setCurrentPage,
   setTotalPages,

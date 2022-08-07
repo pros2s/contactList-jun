@@ -1,21 +1,28 @@
-import { call, put, select, takeLatest, fork } from "redux-saga/effects";
+import { call, put, select, takeLatest, fork } from 'redux-saga/effects';
 
-import { deletingContacts, failedDeletedContact } from "../slices/deleteContact";
-import { succesDeletedContact } from "../slices/fetchContacts";
+import {
+  deletingContacts,
+  endOfDeleteContact,
+  failedDeletedContact,
+} from '../slices/deleteContact';
 
-import callAPI from "./sagasHelpers/api";
-import { DELETE_CONTACT, GET_CONTACTS } from "./sagasHelpers/variables";
+import callAPI from './sagasHelpers/api';
+import { DELETE_CONTACT, GET_CONTACTS } from './sagasHelpers/variables';
 
 
 export function* workerDeleteContact() {
   try {
     yield put(deletingContacts());
     const { deletedContactReducer } = yield select();
-    yield put(succesDeletedContact(deletedContactReducer.id));
-    yield call(() => callAPI({ url: `http://localhost:3001/data/${deletedContactReducer.id}`, method: 'DELETE' }));
+    yield call(() =>
+      callAPI({
+        url: `http://localhost:3001/data/${deletedContactReducer.deleteContactId}`,
+        method: 'DELETE',
+      }),
+    );
+    yield put(endOfDeleteContact());
     yield put({ type: GET_CONTACTS });
   } catch (e) {
-    console.log(e)
     yield put(failedDeletedContact());
   }
 }

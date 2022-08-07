@@ -1,5 +1,5 @@
 import { call, fork, put, select, takeEvery } from 'redux-saga/effects';
-import { editingContacts, failedEditedContact } from '../slices/editContact';
+import { editingContacts, endOfEditingContact, failedEditedContact } from '../slices/editContact';
 
 import callAPI from './sagasHelpers/api';
 import { EDIT_CONTACT, GET_CONTACTS } from './sagasHelpers/variables';
@@ -11,11 +11,12 @@ function* workerEditContact() {
     const { editContactReducer } = yield select();
     yield call(() =>
       callAPI({
-        url: `http://localhost:3001/data/${editContactReducer.id}`,
+        url: `http://localhost:3001/data/${editContactReducer.editedId}`,
         method: 'PATCH',
         data: editContactReducer.editedData,
       }),
     );
+    yield put(endOfEditingContact());
     yield put({ type: GET_CONTACTS });
   } catch (e) {
     console.log(e);

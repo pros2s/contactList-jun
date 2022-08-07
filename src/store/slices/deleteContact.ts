@@ -3,15 +3,15 @@ import { RootState } from "../store"
 
 
 interface DeleteContactState {
-  loading: boolean
-  id: string
-  error: string
+  deleteContactLoading: boolean
+  deleteContactId: string
+  deleteContactError: string
 }
 
 const initialState: DeleteContactState = {
-  loading: false,
-  id: '',
-  error: ''
+  deleteContactLoading: false,
+  deleteContactId: '',
+  deleteContactError: ''
 }
 
 const deleteContactSlice = createSlice({
@@ -19,21 +19,28 @@ const deleteContactSlice = createSlice({
   initialState,
   reducers: {
     deletingContacts(state) {
-      state.loading = true
+      state.deleteContactLoading = true
     },
     setDeletedContactId(state, { payload }: PayloadAction<string>) {
-      state.loading = false;
-      state.error = '';
-      state.id = payload
+      state.deleteContactLoading = false;
+      state.deleteContactError = '';
+      state.deleteContactId = payload
     },
     failedDeletedContact(state) {
-      state.error = 'Error with deleting contact'
-    }
+      state.deleteContactError = 'Error with deleting contact';
+      state.deleteContactLoading = false;
+    },
+    resetDeleteError(state) {
+      state.deleteContactError = '';
+    },
+    endOfDeleteContact(state) {
+      state.deleteContactLoading = false;
+    },
   }
 })
 
 export const deletedContactSelector = (state: RootState) => state.deletedContactReducer;
-export const { deletingContacts, failedDeletedContact, setDeletedContactId } = deleteContactSlice.actions;
+export const { deletingContacts, failedDeletedContact, setDeletedContactId, resetDeleteError, endOfDeleteContact } = deleteContactSlice.actions;
 
 
 export default deleteContactSlice.reducer;
