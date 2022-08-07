@@ -1,5 +1,5 @@
 import { call, fork, put, select, takeLatest } from 'redux-saga/effects';
-import { additingContact, additingError } from '../slices/addContact';
+import { additingContactLoading, additingError, endOfAdditingContact } from '../slices/addContact';
 
 import callAPI from './sagasHelpers/api';
 import { ADD_NEW_CONTACT, GET_CONTACTS } from './sagasHelpers/variables';
@@ -7,7 +7,7 @@ import { ADD_NEW_CONTACT, GET_CONTACTS } from './sagasHelpers/variables';
 
 function* workerAddContact() {
   try {
-    yield put(additingContact());
+    yield put(additingContactLoading());
     const { addContactReducer } = yield select();
     yield call(() =>
       callAPI({
@@ -16,9 +16,9 @@ function* workerAddContact() {
         data: addContactReducer.values,
       }),
     );
+    yield put(endOfAdditingContact());
     yield put({ type: GET_CONTACTS });
   } catch (e) {
-    console.log(e);
     yield put(additingError());
   }
 }

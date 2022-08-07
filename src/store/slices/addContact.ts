@@ -27,21 +27,34 @@ const addContactSlice = createSlice({
   name: 'addContact',
   initialState,
   reducers: {
-    additingContact(state) {
+    additingContactLoading(state) {
       state.loading = true;
     },
     setContactNewValues(state, { payload }: PayloadAction<IContact>) {
-      state.loading = false;
       state.values = payload;
+      state.loading = false;
+    },
+    endOfAdditingContact(state) {
+      state.loading = false;
     },
     additingError(state) {
       state.error = 'Error with additing contact';
+      state.loading = false;
+    },
+    resetAdditinError(state) {
+      state.error = '';
     },
   },
 });
 
-export const deletedContactSelector = (state: RootState) => state.addContactReducer;
-export const { additingContact, additingError, setContactNewValues } = addContactSlice.actions;
+export const addedContactSelector = (state: RootState) => state.addContactReducer;
+export const {
+  additingError,
+  setContactNewValues,
+  resetAdditinError,
+  additingContactLoading,
+  endOfAdditingContact,
+} = addContactSlice.actions;
 
 
 export default addContactSlice.reducer;

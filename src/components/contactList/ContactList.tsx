@@ -27,7 +27,6 @@ const ContactList: FC = () => {
     [dispatch],
   );
 
-
   const searchedContacts = contacts.filter((contact) => {
     const fullName = `
       ${contact.name.title}
@@ -43,11 +42,13 @@ const ContactList: FC = () => {
 
   return (
     <div className='contacts'>
-      {loading ? <Loader info='Loading Contacts'/> :
+      {loading ? (
+        <Loader info='Loading Contacts' />
+      ) : (
         searchedContacts.map((contact) => (
           <ContactItem key={contact.id} contact={contact} deleteContact={deleteContact} />
         ))
-      }
+      )}
     </div>
   );
 };

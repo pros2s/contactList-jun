@@ -1,23 +1,35 @@
 import { FC, useEffect, useState } from 'react';
-import { RiAddLine } from 'react-icons/ri';
+import { RiAddLine, RiCloseLine } from 'react-icons/ri';
+import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 import { ADD_NEW_CONTACT } from '../../store/sagas/sagasHelpers/variables';
+import { addedContactSelector, resetAdditinError } from '../../store/slices/addContact';
 import { fetchContactsSelector } from '../../store/slices/fetchContacts';
+import ErrorMini from '../UI/errors/errorMini/ErrorMini';
+import Loader from '../UI/loader/Loader';
 import NewDataForm, { NewData } from '../UI/NewDataForm';
 
 import './addNewContactMenu.scss';
 
 
 const AddNewContactMenu: FC = () => {
+  const dispatch = useTypedDispatch();
+
   const { totalPages } = useTypedSelector(fetchContactsSelector);
+  const { error, loading } = useTypedSelector(addedContactSelector);
 
   const [addition, setAddition] = useState<boolean>(false);
+  const [addError, setAddError] = useState<boolean>(false);
   const [aLotOfPages, setALotOfPages] = useState<boolean>(false);
 
   useEffect(() => {
     document.body.style.overflow = addition ? 'hidden' : '';
   }, [addition]);
+
+  useEffect(() => {
+    error && setAddError(true);
+  }, [error]);
 
 
   const initialValues: NewData = {
@@ -37,14 +49,31 @@ const AddNewContactMenu: FC = () => {
     }, 3000);
   };
 
+  const deleteError = () => {
+    dispatch(resetAdditinError());
+    setAddError(false);
+  };
+
 
   return (
     <>
-      <button data-testid='addNewContact' className='new-data' onClick={() => onClickAddNewContact()}>
-        <RiAddLine />
-        <button>Add new Contact</button>
-        {aLotOfPages && <p className='new-data__aLotOf-pages'>Too much pages</p>}
-      </button>
+      <div className='new-data'>
+        {loading ? (
+          <Loader width='20' info='Loading add contact' />
+        ) : (
+          <button
+            data-testid='addNewContact'
+            className='new-data__add'
+            onClick={() => onClickAddNewContact()}>
+            <RiAddLine />
+            <p>Add new Contact</p>
+            {aLotOfPages && <p className='new-data__aLotOf-pages'>Too much pages</p>}
+          </button>
+        )}
+
+        {addError && <ErrorMini message='Error with additing new contact' />}
+        {addError && <RiCloseLine onClick={() => deleteError()} />}
+      </div>
 
       {addition && (
         <div className='new-data-background' onClick={() => setAddition(false)}>

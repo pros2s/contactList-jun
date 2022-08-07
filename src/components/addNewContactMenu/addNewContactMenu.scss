@@ -1,4 +1,10 @@
 .new-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-data__add {
   position: relative;
 
   display: flex;
