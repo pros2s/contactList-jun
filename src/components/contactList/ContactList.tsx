@@ -10,6 +10,8 @@ import { DELETE_CONTACT } from '../../store/sagas/sagasHelpers/variables';
 
 import ContactItem from '../contactItem/ContactItem';
 
+import './contactList.scss';
+
 
 const ContactList: FC = () => {
   const { contacts, loading } = useTypedSelector(fetchContactsSelector);
@@ -37,10 +39,9 @@ const ContactList: FC = () => {
   });
 
   return (
-    <div>
+    <div className='contacts'>
       {loading && <p>Loading...</p>}
 
-      <h1>{contacts.length}</h1>
       {searchedContacts.map((contact) => (
         <ContactItem key={contact.id} contact={contact} deleteContact={deleteContact} />
       ))}

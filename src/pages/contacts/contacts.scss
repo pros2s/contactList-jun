@@ -1,0 +1,20 @@
+.contact-page {
+  background: linear-gradient(rgba(98,149,152,1) 0%, rgba(217,186,165,1) 33%, rgba(90,68,93,1) 66%, rgba(9,5,54,1) 100%);
+
+  padding: 20px;
+}
+
+.contact-page__inner {
+  width: 750px;
+  margin: 0 auto;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #fff;
+  }
+}

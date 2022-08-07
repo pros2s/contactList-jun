@@ -7,6 +7,8 @@ import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 
 import { GET_CONTACTS } from '../../store/sagas/sagasHelpers/variables';
 
+import './contacts.scss';
+
 
 const Contacts: FC = () => {
   const dispatch = useTypedDispatch();
@@ -17,10 +19,14 @@ const Contacts: FC = () => {
 
 
   return (
-    <div>
-      <Search />
-      <AddNewContactMenu />
-      <ContactList />
+    <div className='contact-page'>
+      <div className="contact-page__inner">
+        <header>
+          <AddNewContactMenu />
+          <Search />
+        </header>
+        <ContactList />
+      </div>
     </div>
   );
 };
