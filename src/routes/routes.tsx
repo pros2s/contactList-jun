@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import Contacts from '../pages/contacts/Contacts';
 import LoginPage from '../pages/login/Login';
 
-import NotFound from '../pages/NotFound';
+import NotFound from '../pages/notFound/NotFound';
 
 
 export interface RouteElement {
