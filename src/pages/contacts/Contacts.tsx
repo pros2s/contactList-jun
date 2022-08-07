@@ -20,7 +20,7 @@ const Contacts: FC = () => {
 
   return (
     <div className='contact-page'>
-      <div className="contact-page__inner">
+      <div className='contact-page__inner'>
         <header>
           <AddNewContactMenu />
           <Search />

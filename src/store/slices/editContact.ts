@@ -1,47 +1,52 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { NewContactValues } from "../../types/contacts"
-import { RootState } from "../store"
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IContact } from '../../types/contacts';
+import { RootState } from '../store';
 
 
 interface EditContactState {
-  editedData: NewContactValues | null
-  loading: boolean
-  id: string
-  error: string
+  editedData: IContact | null;
+  loading: boolean;
+  id: string;
+  error: string;
 }
 
 const initialState: EditContactState = {
   editedData: null,
   loading: false,
   id: '',
-  error: ''
-}
+  error: '',
+};
 
 const editContactSlice = createSlice({
   name: 'editContact',
   initialState,
   reducers: {
     editingContacts(state) {
-      state.loading = true
+      state.loading = true;
     },
     setEditedContactId(state, { payload }: PayloadAction<string>) {
       state.loading = false;
       state.error = '';
-      state.id = payload
+      state.id = payload;
     },
-    setEditedContactValues(state, { payload }: PayloadAction<NewContactValues>) {
+    setEditedContactValues(state, { payload }: PayloadAction<IContact>) {
       state.loading = false;
       state.error = '';
-      state.editedData = payload
+      state.editedData = payload;
     },
     failedEditedContact(state) {
-      state.error = 'Error with editing contact'
-    }
-  }
-})
+      state.error = 'Error with editing contact';
+    },
+  },
+});
 
 export const editedContactSelector = (state: RootState) => state.editContactReducer;
-export const { editingContacts, failedEditedContact, setEditedContactId, setEditedContactValues } = editContactSlice.actions;
+export const {
+  editingContacts,
+  failedEditedContact,
+  setEditedContactId,
+  setEditedContactValues
+} = editContactSlice.actions;
 
 
 export default editContactSlice.reducer;

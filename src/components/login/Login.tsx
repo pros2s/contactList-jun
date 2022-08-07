@@ -20,6 +20,7 @@ const Login: FC = () => {
   const route = useNavigate();
   const dispatch = useTypedDispatch();
 
+
   const formValidation = yup.object({
     emailInput: yup
       .string()
@@ -28,6 +29,8 @@ const Login: FC = () => {
 
     passwordInput: yup.string().required('Not required').min(4, 'Minimum 4 symbols'),
   });
+
+
   return (
     <Formik<LoginForm>
       initialValues={{

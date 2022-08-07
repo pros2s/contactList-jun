@@ -17,16 +17,17 @@ const NotFound: FC = () => {
       <div className='error__footer'>
         <div className='error__footer-back'>
           <p>You can go back</p>
-          <RiArrowGoBackLine onClick={() => navigate(-1)}/>
+          <RiArrowGoBackLine onClick={() => navigate(-1)} />
         </div>
 
         <div className='error__footer-login'>
           <p>or to login page</p>
-          <RiLoginBoxLine onClick={() => navigate('login')}/>
+          <RiLoginBoxLine onClick={() => navigate('login')} />
         </div>
       </div>
     </div>
   );
 };
+
 
 export default NotFound;

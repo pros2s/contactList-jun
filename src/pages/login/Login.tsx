@@ -13,9 +13,7 @@ const LoginPage: FC = () => {
     dispatch(falseAutorization());
   }, [dispatch]);
 
-  return (
-    <Login />
-  );
+  return <Login />;
 };
 
 

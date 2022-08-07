@@ -3,29 +3,37 @@ import { nanoid } from '@reduxjs/toolkit';
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { NewContactValues } from '../../types/contacts';
+import { RiCloseLine, RiAddLine, RiEdit2Line } from 'react-icons/ri';
+
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 import { setEditedContactId, setEditedContactValues } from '../../store/slices/editContact';
+
+import { IContact } from '../../types/contacts';
 import { setContactNewValues } from '../../store/slices/addContact';
 
 import { ADD_NEW_CONTACT, EDIT_CONTACT } from '../../store/sagas/sagasHelpers/variables';
 import InputWithError from './InputWithError';
 
+import '../addNewContactMenu/addNewContactMenu.scss';
 
-interface NewData {
+
+export interface NewData {
   firstName: string;
   lastName: string;
   email: string;
+  age: number | undefined;
+  phone: string | undefined;
+  location: string | undefined;
 }
 
 interface NewDataProps {
   payloadType: string;
   setViewForm: React.Dispatch<React.SetStateAction<boolean>>;
   contactId?: string;
-  formName: string;
+  initialValues: NewData;
 }
 
-const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId, formName }) => {
+const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId, initialValues }) => {
   const dispatch = useTypedDispatch();
 
   const formValidation = yup.object({
@@ -38,13 +46,24 @@ const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId, fo
     firstName: yup.string().required('Not required').max(15, 'Maximum 15 symbols'),
   });
 
-  const addNewData = (first: string, last: string, email: string, contactId: string) => {
-    const newValues: NewContactValues = {
-      email: email,
+  const addNewData = (
+    first: string,
+    last: string,
+    email: string,
+    location: string | undefined,
+    phone: string | undefined,
+    age: number | undefined,
+    contactId: string,
+  ) => {
+    const newValues: IContact = {
+      email,
       name: {
         first: first,
         last: last,
       },
+      age,
+      location,
+      phone,
       id: nanoid(),
     };
     if (payloadType === EDIT_CONTACT) {
@@ -59,19 +78,18 @@ const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId, fo
   };
 
   return (
-    <div>
+    <div className='new-data-form' onClick={(e) => e.stopPropagation()}>
       <Formik<NewData>
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          email: '',
-        }}
+        initialValues={initialValues}
         validationSchema={formValidation}
         onSubmit={(values, { resetForm }) => {
           addNewData(
             values.firstName,
             values.lastName,
             values.email,
+            values.location,
+            values.phone,
+            values.age,
             (contactId = contactId || ''),
           );
           resetForm();
@@ -80,39 +98,76 @@ const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId, fo
           <div>
             <form onSubmit={handleSubmit}>
               <InputWithError
+                className='new-data__field'
                 maxLength={30}
                 type='text'
                 name='firstName'
-                placeholder='new first name'
+                placeholder='set new first name*'
                 value={values.firstName.trim()}
                 onChange={handleChange}
               />
 
               <InputWithError
+                className='new-data__field'
                 maxLength={30}
                 type='text'
                 name='lastName'
-                placeholder='new last name'
+                placeholder='set new last name*'
                 value={values.lastName.trim()}
                 onChange={handleChange}
               />
 
               <InputWithError
+                className='new-data__field'
                 maxLength={30}
                 type='email'
                 name='email'
-                placeholder='new email'
+                placeholder='set new email*'
                 value={values.email.trim()}
                 onChange={handleChange}
               />
 
-              <button type='submit'>{formName}</button>
+              <InputWithError
+                type='text'
+                name='location'
+                placeholder='set new location'
+                value={values.location}
+                onChange={handleChange}
+              />
+
+              <InputWithError
+                type='tel'
+                name='phone'
+                pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+                placeholder='set new phone number(123-456-7890)'
+                value={values.phone}
+                onChange={handleChange}
+              />
+
+              <InputWithError
+                type='number'
+                min='0'
+                max='200'
+                name='age'
+                placeholder='set new age'
+                value={values.age}
+                onChange={handleChange}
+              />
+
+              <div className='new-data__footer'>
+                <button className='new-data__submit' type='submit'>
+                  {payloadType === ADD_NEW_CONTACT && <RiAddLine />}
+                  {payloadType === EDIT_CONTACT && <RiEdit2Line />}
+                </button>
+
+                <p>* - required fields</p>
+              </div>
             </form>
           </div>
         )}
       </Formik>
-      <button type='submit' onClick={() => setViewForm(false)}>
-        X
+      <button className='new-data__close' type='submit' onClick={() => setViewForm(false)}>
+        <RiCloseLine />
       </button>
     </div>
   );

@@ -10,6 +10,7 @@ const Search: FC = () => {
   const { searchData } = useTypedSelector(searchDataSelector);
   const dispatch = useTypedDispatch();
 
+  
   return (
     <div>
       <input

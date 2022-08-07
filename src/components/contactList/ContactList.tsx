@@ -26,6 +26,7 @@ const ContactList: FC = () => {
     [dispatch],
   );
 
+
   const searchedContacts = contacts.filter((contact) => {
     const fullName = `
       ${contact.name.title}
@@ -37,6 +38,7 @@ const ContactList: FC = () => {
 
     return fullName.toLowerCase().includes(searchData.toLowerCase());
   });
+
 
   return (
     <div className='contacts'>
