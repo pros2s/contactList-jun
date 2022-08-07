@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, memo, useState } from 'react';
 
 import { EDIT_CONTACT } from '../../store/sagas/sagasHelpers/variables';
 
@@ -15,7 +15,7 @@ interface ContactItemProps {
   deleteContact: (id: string) => void;
 }
 
-const ContactItem: FC<ContactItemProps> = ({ contact, deleteContact }) => {
+const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
   const [editing, setEditing] = useState<boolean>(false);
 
   const { email, id, name, age, location, phone, picture } = contact;
@@ -64,7 +64,7 @@ const ContactItem: FC<ContactItemProps> = ({ contact, deleteContact }) => {
       </div>
     </div>
   );
-};
+});
 
 
 export default ContactItem;

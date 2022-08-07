@@ -1,5 +1,5 @@
 import { ErrorMessage } from 'formik';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
 
 interface InputProps {
@@ -20,7 +20,7 @@ interface InputProps {
   };
 }
 
-const InputWithError: FC<InputProps> = ({
+const InputWithError: FC<InputProps> = memo(({
   name,
   type,
   maxLength,
@@ -48,7 +48,7 @@ const InputWithError: FC<InputProps> = ({
       <ErrorMessage component='p' name={name} data-testid={name} />
     </div>
   );
-};
+});
 
 
 export default InputWithError;

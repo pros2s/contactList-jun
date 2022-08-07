@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 
 import { Formik } from 'formik';
@@ -33,7 +33,7 @@ interface NewDataProps {
   initialValues: NewData;
 }
 
-const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId, initialValues }) => {
+const NewDataForm: FC<NewDataProps> = memo(({ payloadType, setViewForm, contactId, initialValues }) => {
   const dispatch = useTypedDispatch();
 
   const formValidation = yup.object({
@@ -171,7 +171,7 @@ const NewDataForm: FC<NewDataProps> = ({ payloadType, setViewForm, contactId, in
       </button>
     </div>
   );
-};
+});
 
 
 export default NewDataForm;
