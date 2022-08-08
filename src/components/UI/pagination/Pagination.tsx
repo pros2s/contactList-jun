@@ -26,7 +26,7 @@ const Pagination: FC = () => {
   }, [totalContacts, dispatch]);
 
   useEffect(() => {
-    !contacts.length && dispatch(setCurrentPage(`${totalPages - 1}`));
+    contacts.length === 1 && dispatch(setCurrentPage(`${totalPages - 1}`));
   }, [dispatch, contacts, totalPages]);
 
 

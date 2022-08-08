@@ -1,11 +1,14 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import { trueAutorization } from '../../store/slices/isAutorized';
-import { useNavigate } from 'react-router-dom';
+import { fetchContactsSelector, setCurrentPage } from '../../store/slices/fetchContacts';
 
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+
 import InputWithError from '../../components/UI/InputWithError';
 
 import './login.scss';
@@ -19,6 +22,7 @@ interface LoginForm {
 const Login: FC = () => {
   const route = useNavigate();
   const dispatch = useTypedDispatch();
+  const { totalPages } = useTypedSelector(fetchContactsSelector);
 
 
   const formValidation = yup.object({
@@ -41,6 +45,7 @@ const Login: FC = () => {
       onSubmit={(_, { resetForm }) => {
         route(`/contacts/1`);
         dispatch(trueAutorization());
+        dispatch(setCurrentPage(totalPages.toString()));
         resetForm();
       }}>
       {({ handleSubmit, values, handleChange }) => (

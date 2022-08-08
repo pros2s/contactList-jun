@@ -13,6 +13,7 @@ const history = createBrowserHistory();
 const App: FC = () => {
   const { isAutorized } = useTypedSelector(isAutorizedSelelector);
 
+  
   return (
     <div data-testid='app'>
       <HistoryRouter history={history}>

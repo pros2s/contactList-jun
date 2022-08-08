@@ -79,8 +79,10 @@
 
   transition: all 0.2s linear;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: #fff;
     color: #303030;
+    outline: none;
   }
 }

@@ -1,4 +1,4 @@
-import { FC, memo, useRef } from 'react';
+import { FC, memo } from 'react';
 import { Params, useNavigate, useParams } from 'react-router-dom';
 
 import { useTypedDispatch } from '../../../hooks/useTypedDispatch';
@@ -14,7 +14,6 @@ interface PageButtonProps {
 
 const PageButton: FC<PageButtonProps> = memo(({ page, arrLength, index }) => {
   const dispatch = useTypedDispatch();
-  const pageRef = useRef<HTMLButtonElement>(null);
 
   const navigate = useNavigate();
   const { id }: Params<string> = useParams();
@@ -30,7 +29,6 @@ const PageButton: FC<PageButtonProps> = memo(({ page, arrLength, index }) => {
 
   return (
     <button
-      ref={pageRef}
       className={`${
         revertedPage.toString() === id ? 'pagination__elem active' : 'pagination__elem'
       }`}

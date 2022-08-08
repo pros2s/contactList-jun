@@ -1,20 +1,21 @@
 import { FC, memo, useEffect, useState } from 'react';
+import { RiCloseLine, RiDeleteBin4Fill, RiEdit2Fill } from 'react-icons/ri';
 
 import { EDIT_CONTACT } from '../../store/sagas/sagasHelpers/variables';
+import { IContact, NewData } from '../../types/contacts';
 
-import { IContact } from '../../types/contacts';
-import NewDataForm, { NewData } from '../UI/NewDataForm';
+import NewDataForm from '../UI/NewDataForm';
+import ErrorMini from '../UI/errors/errorMini/ErrorMini';
+import Loader from '../UI/loader/Loader';
+
+import { deletedContactSelector, resetDeleteError } from '../../store/slices/deleteContact';
+import { editedContactSelector, resetEditingError } from '../../store/slices/editContact';
+
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 
 import '../addNewContactMenu/addNewContactMenu.scss';
-
 import './contactItem.scss';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { editedContactSelector, resetEditingError } from '../../store/slices/editContact';
-import Loader from '../UI/loader/Loader';
-import ErrorMini from '../UI/errors/errorMini/ErrorMini';
-import { RiCloseLine } from 'react-icons/ri';
-import { useTypedDispatch } from '../../hooks/useTypedDispatch';
-import { deletedContactSelector, resetDeleteError } from '../../store/slices/deleteContact';
 
 
 interface ContactItemProps {
@@ -68,25 +69,26 @@ const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
           ) : error && id === editedId ? (
             <ErrorMini message='Error with edit contact' />
           ) : (
-            <button className='contact__crud-edit' onClick={() => setEditing(true)}>
-              edit
-            </button>
+            <div
+              data-text='edit'
+              className="contact__crud-edit">
+                <RiEdit2Fill onClick={() => setEditing(true)} />
+            </div>
           )}
           {error && id === editedId && (
             <RiCloseLine onClick={() => dispatch(resetEditingError())} />
           )}
 
-          {deleteContactLoading ? (
+          {deleteContactLoading && id === deleteContactId ? (
             <Loader width='20' info='Loading delete contact' />
           ) : deleteContactError && id === deleteContactId ? (
             <ErrorMini message='Error with delete contact' />
           ) : (
-            <button
-              className='contact__crud-delete'
-              onClick={() => deleteContact(id)}
-              style={{ height: 30 }}>
-              delete
-            </button>
+            <div
+              data-text='delete'
+              className="contact__crud-delete">
+                <RiDeleteBin4Fill onClick={() => deleteContact(id)} />
+            </div>
           )}
           {deleteContactError && id === deleteContactId && (
             <RiCloseLine onClick={() => dispatch(resetDeleteError())} />

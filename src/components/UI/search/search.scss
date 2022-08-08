@@ -1,33 +1,37 @@
 .search {
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border: 2px solid #fff;
-  border-radius: 10px;
-
+  border-right: 1px solid;
+  padding-right: 15px;
   color: #fff;
+
 
   input {
     margin-left: 10px;
+    padding: 5px 10px;
 
     background: transparent;
-    border: none;
+    border: 1px solid #fff;
+    border-radius: 10px;
     outline: none;
 
     color: #fff;
 
+    &:focus {
+      border: 2px solid #fff;
+    }
+
     &::placeholder {
-      color: #fff;
+      color: rgba(255, 255, 255, 0.425);
+      font-weight: lighter;
     }
 
     @media screen and (max-width: 500px) {
       width: 70px;
     }
-  }
-
-  svg {
-    font-size: 20px;
-    margin-right: 10px;
   }
 }

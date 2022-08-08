@@ -19,6 +19,7 @@ export const publicRoutes: Array<RouteElement> = [
 
 export const privateRoutes: Array<RouteElement> = [
   { path: '/', element: <Navigate replace to='/contacts/1' /> },
+  { path: '/contacts', element: <Navigate replace to='/contacts/1' /> },
   { path: '/contacts/:id', element: <Contacts /> },
   { path: '/login', element: <LoginPage /> },
   { path: '/*', element: <NotFound /> },

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { RiSearch2Line } from 'react-icons/ri';
 
 import { useTypedDispatch } from '../../../hooks/useTypedDispatch';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
@@ -15,14 +14,13 @@ const Search: FC = () => {
 
 
   return (
-    <div className='search'>
+    <div className='search' tabIndex={-1}>
       <input
         type='text'
         placeholder='search'
         value={searchData}
         onChange={(e) => dispatch(setSearchValue(e.target.value))}
       />
-      <RiSearch2Line />
     </div>
   );
 };

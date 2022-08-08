@@ -21,57 +21,66 @@
 
   flex-wrap: wrap;
   justify-content: flex-end;
+  align-items: center;
 
   @media screen and (max-width: 600px) {
     width: 100px;
   }
 }
 
-.contact__crud-delete {
-  border: 2px solid #ff1010;
-
-  color: #ff1010;
-
-  &:hover {
-    background: #ff1010;
-    color: #fff;
-  }
-}
-
-.contact__crud-edit {
-  border: 2px solid #10cfff;
-
-  color: #10cfff;
-
-  &:hover {
-    background: #10cfff;
-    color: #fff;
-  }
-}
-
 .contact__crud-delete,
 .contact__crud-edit {
-  padding: 5px 20px;
-  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
 
-  border-radius: 10px;
+  font-size: 25px;
 
-  background: transparent;
+  margin-left: 10px;
 
-  line-height: 1;
-  font-weight: 600;
+  &:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 100%;
+    left: -12px;
 
-  transition: all 0.1s linear;
+    width: 50px;
+    height: 22px;
+    padding: 2px;
 
-  @media screen and (max-width: 600px) {
-    width: 100%;
-    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #807e7e;
+    background-color: #6a6a6a;
+
+    font-size: 15px;
+    font-weight: 300;
+    text-align: center;
+    line-height: 1;
+    color: #fff;
   }
 
-  @media screen and (max-width: 400px) {
-    margin-right: 0;
-    width: 70px;
-    padding: 5px 0;
+  svg {
+
+    transition: all .2s linear;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.contact__crud-delete {
+  color: #ff5f5f;
+
+  &:hover {
+    color: red;
+  }
+}
+
+.contact__crud-edit {
+  color: #00d1ff;
+
+  &:hover {
+    color: #68e4ff;
   }
 }
 

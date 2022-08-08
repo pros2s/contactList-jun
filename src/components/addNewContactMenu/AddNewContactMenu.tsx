@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { RiAddLine, RiCloseLine } from 'react-icons/ri';
+
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
@@ -8,7 +9,9 @@ import { addedContactSelector, resetAdditinError } from '../../store/slices/addC
 import { fetchContactsSelector } from '../../store/slices/fetchContacts';
 import ErrorMini from '../UI/errors/errorMini/ErrorMini';
 import Loader from '../UI/loader/Loader';
-import NewDataForm, { NewData } from '../UI/NewDataForm';
+import NewDataForm from '../UI/NewDataForm';
+
+import { NewData } from '../../types/contacts';
 
 import './addNewContactMenu.scss';
 
@@ -16,15 +19,25 @@ import './addNewContactMenu.scss';
 const AddNewContactMenu: FC = () => {
   const dispatch = useTypedDispatch();
 
-  const { totalPages } = useTypedSelector(fetchContactsSelector);
+  const { currentPage, contacts, totalPages } = useTypedSelector(fetchContactsSelector);
   const { error, loading } = useTypedSelector(addedContactSelector);
 
   const [addition, setAddition] = useState<boolean>(false);
   const [aLotOfPages, setALotOfPages] = useState<boolean>(false);
+  const [aLotOfContacts, setALotOfContacts] = useState<boolean>(false);
 
   useEffect(() => {
     document.body.style.overflow = addition ? 'hidden' : '';
   }, [addition]);
+
+  useEffect(() => {
+    const additionErrorTimeout = setTimeout(() => {
+      setALotOfPages(false);
+      setALotOfContacts(false);
+    }, 3000);
+
+    return () => clearTimeout(additionErrorTimeout);
+  }, [aLotOfPages, aLotOfContacts]);
 
 
   const initialValues: NewData = {
@@ -37,17 +50,19 @@ const AddNewContactMenu: FC = () => {
   };
 
   const onClickAddNewContact = () => {
-    totalPages < 7 ? setAddition(true) : setALotOfPages(true);
-
-    setTimeout(() => {
-      setALotOfPages(false);
-    }, 3000);
+    if (currentPage === '7' && contacts.length === 5) {
+      setALotOfPages(true);
+    } else if (currentPage < totalPages.toString() && contacts.length === 5) {
+      setALotOfContacts(true);
+    } else {
+      setAddition(true);
+    }
   };
 
 
   return (
     <>
-      <div className='new-data'>
+      <div data-text='add new contact' className='new-data'>
         {loading ? (
           <Loader width='20' info='Loading add contact' />
         ) : (
@@ -57,7 +72,10 @@ const AddNewContactMenu: FC = () => {
             onClick={() => onClickAddNewContact()}>
             <RiAddLine />
             <p>Add new Contact</p>
-            {aLotOfPages && <p className='new-data__aLotOf-pages'>Too much pages</p>}
+            {aLotOfPages && <p className='new-data__addition-error'>Too much pages</p>}
+            {!aLotOfPages && aLotOfContacts && (
+              <p className='new-data__addition-error'>Too much contacts on this page</p>
+            )}
           </button>
         )}
 
