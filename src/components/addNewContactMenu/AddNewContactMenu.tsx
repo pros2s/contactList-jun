@@ -5,7 +5,7 @@ import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 import { ADD_NEW_CONTACT } from '../../store/sagas/sagasHelpers/variables';
-import { addedContactSelector, resetAdditinError } from '../../store/slices/addContact';
+import { addedContactSelector, resetAdditingError } from '../../store/slices/addContact';
 import { fetchContactsSelector } from '../../store/slices/fetchContacts';
 import ErrorMini from '../UI/errors/errorMini/ErrorMini';
 import Loader from '../UI/loader/Loader';
@@ -62,29 +62,31 @@ const AddNewContactMenu: FC = () => {
 
   return (
     <>
-      <div data-text='add new contact' className='new-data'>
-        {loading ? (
-          <Loader width='20' info='Loading add contact' />
-        ) : (
-          <button
-            data-testid='addNewContact'
-            className='new-data__add'
-            onClick={() => onClickAddNewContact()}>
-            <RiAddLine />
-            <p>Add new Contact</p>
-            {aLotOfPages && <p className='new-data__addition-error'>Too much pages</p>}
-            {!aLotOfPages && aLotOfContacts && (
-              <p className='new-data__addition-error'>Too much contacts on this page</p>
-            )}
-          </button>
-        )}
+      <div
+        data-testid='addNewContact'
+        data-text='add new contact'
+        className='new-data'>
+          {loading ? (
+            <Loader width='20' info='Loading add contact' />
+          ) : (
+            <button
+              data-testid='addNewContactButton'
+              className='new-data__add'
+              onClick={() => onClickAddNewContact()}>
+                <RiAddLine />
+                <p>Add new Contact</p>
 
-        {error && <ErrorMini message='Error with additing new contact' />}
-        {error && <RiCloseLine onClick={() => dispatch(resetAdditinError())} />}
+                {aLotOfPages && <p className='new-data__addition-error'>Too much pages</p>}
+                {!aLotOfPages && aLotOfContacts && <p className='new-data__addition-error'>Too much contacts on this page</p>}
+            </button>
+          )}
+
+          {error && <ErrorMini message='Error with additing new contact' />}
+          {error && <RiCloseLine onClick={() => dispatch(resetAdditingError())} />}
       </div>
 
       {addition && (
-        <div className='new-data-background' onClick={() => setAddition(false)}>
+        <div data-testid='additionalForm' className='new-data-background' onClick={() => setAddition(false)}>
           <NewDataForm
             payloadType={ADD_NEW_CONTACT}
             setViewForm={setAddition}

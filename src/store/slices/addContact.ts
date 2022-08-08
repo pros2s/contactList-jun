@@ -41,7 +41,7 @@ const addContactSlice = createSlice({
       state.error = 'Error with additing contact';
       state.loading = false;
     },
-    resetAdditinError(state) {
+    resetAdditingError(state) {
       state.error = '';
     },
   },
@@ -51,7 +51,7 @@ export const addedContactSelector = (state: RootState) => state.addContactReduce
 export const {
   additingError,
   setContactNewValues,
-  resetAdditinError,
+  resetAdditingError,
   additingContactLoading,
   endOfAdditingContact,
 } = addContactSlice.actions;
