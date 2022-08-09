@@ -11,7 +11,7 @@ interface ErrorMiniProps {
 
 const ErrorMini: FC<ErrorMiniProps> = ({ message }) => {
   return (
-    <div className='error-mini'>
+    <div data-testid='errorMini' className='error-mini'>
       <img src={errorMini} alt='error message' />
       <p>{message}</p>
     </div>
