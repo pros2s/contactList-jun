@@ -11,16 +11,16 @@ const NotFound: FC = () => {
 
 
   return (
-    <div className='error'>
+    <div data-testid='notFound' className='error'>
       <p className='error__type'>404</p>
       <p className='error__name'>Page not found</p>
-      <div className='error__footer'>
-        <div className='error__footer-back'>
+      <div data-testid='notFoundFooter' className='error__footer'>
+        <div data-testid='notFoundFooterBack' className='error__footer-back'>
           <p>You can go back</p>
           <RiArrowGoBackLine onClick={() => navigate(-1)} />
         </div>
 
-        <div className='error__footer-login'>
+        <div data-testid='notFoundFooterLogin' className='error__footer-login'>
           <p>or to login page</p>
           <RiLoginBoxLine onClick={() => navigate('login')} />
         </div>

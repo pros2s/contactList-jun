@@ -26,21 +26,21 @@ const Contacts: FC = () => {
 
 
   return (
-    <div className='contact-page'>
+    <div data-testid='contactsPage' className='contact-page'>
       {error ? (
         <Error message='Error with fetch contacts' />
       ) : (
-        <div className='contact-page__inner'>
-          <header>
+        <div data-testid='contactsInner' className='contact-page__inner'>
+          <header data-testid='contactsHeader'>
             <AddNewContactMenu />
 
-            <div className='contact-page__rightHeader'>
+            <div data-testid='contactsRightSideHeader' className='contact-page__rightHeader'>
               <Search />
               <Logout />
             </div>
           </header>
           <ContactList />
-          <footer>
+          <footer data-testid='contactsFooter'>
             <Pagination />
           </footer>
         </div>
