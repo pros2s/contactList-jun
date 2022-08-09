@@ -51,10 +51,10 @@ const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
 
   return (
     <>
-      <div className='contact'>
-        <div className='contact__data'>
+      <div data-testid='contact' className='contact'>
+        <div data-testid='contactData' className='contact__data'>
           <img className='contact__data-img' src={picture?.large} alt='contactAvatar' />
-          <div className='contact__data-info'>
+          <div data-testid='contactDataInfo' className='contact__data-info'>
             <h3>{`${contactTitle} ${name?.first} ${name?.last}`}</h3>
             <p>email: {email}</p>
             <p>address: {location}</p>
@@ -63,16 +63,14 @@ const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
           </div>
         </div>
 
-        <div className='contact__crud'>
+        <div data-testid='contactCrud' className='contact__crud'>
           {loading ? (
             <Loader width='20' info='Loading edit contact' />
           ) : error && id === editedId ? (
             <ErrorMini message='Error with edit contact' />
           ) : (
-            <div
-              data-text='edit'
-              className="contact__crud-edit">
-                <RiEdit2Fill onClick={() => setEditing(true)} />
+            <div data-testid='contactCrudEdit' data-text='edit' className='contact__crud-edit'>
+              <RiEdit2Fill data-testid='editButton' onClick={() => setEditing(true)} />
             </div>
           )}
           {error && id === editedId && (
@@ -80,14 +78,15 @@ const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
           )}
 
           {deleteContactLoading && id === deleteContactId ? (
-            <Loader width='20' info='Loading delete contact' />
+            <Loader data-testid='deleteLoader' width='20' info='Loading delete contact' />
           ) : deleteContactError && id === deleteContactId ? (
             <ErrorMini message='Error with delete contact' />
           ) : (
             <div
+              data-testid='contactCrudDelete'
               data-text='delete'
-              className="contact__crud-delete">
-                <RiDeleteBin4Fill onClick={() => deleteContact(id)} />
+              className='contact__crud-delete'>
+                <RiDeleteBin4Fill data-testid='deleteButton' onClick={() => deleteContact(id)} />
             </div>
           )}
           {deleteContactError && id === deleteContactId && (
@@ -97,7 +96,7 @@ const ContactItem: FC<ContactItemProps> = memo(({ contact, deleteContact }) => {
       </div>
 
       {editing && (
-        <div className='new-data-background' onClick={() => setEditing(false)}>
+        <div data-testid='editMenu' className='new-data-background' onClick={() => setEditing(false)}>
           <NewDataForm
             contactId={id}
             payloadType={EDIT_CONTACT}
