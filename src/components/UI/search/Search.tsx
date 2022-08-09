@@ -14,7 +14,7 @@ const Search: FC = () => {
 
 
   return (
-    <div className='search' tabIndex={-1}>
+    <div data-testid='search' className='search' tabIndex={-1}>
       <input
         type='text'
         placeholder='search'
