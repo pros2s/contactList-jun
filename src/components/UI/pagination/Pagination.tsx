@@ -3,12 +3,12 @@ import { nanoid } from '@reduxjs/toolkit';
 
 import { usePagesArray } from '../../../hooks/usePagesArray';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { useTypedDispatch } from '../../../hooks/useTypedDispatch';
 import {
   fetchContactsSelector,
   setCurrentPage,
   setTotalPages,
 } from '../../../store/slices/fetchContacts';
-import { useTypedDispatch } from '../../../hooks/useTypedDispatch';
 
 import PageButton from './PageButton';
 
