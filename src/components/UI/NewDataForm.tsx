@@ -2,7 +2,7 @@ import { FC, memo } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { RiCloseLine, RiAddLine, RiEdit2Line } from 'react-icons/ri';
 
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
@@ -112,7 +112,7 @@ const NewDataForm: FC<NewDataProps> = memo(
           }}>
           {({ handleSubmit, values, handleChange }) => (
             <div>
-              <form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit}>
                 <InputWithError
                   className='new-data__field'
                   maxLength={30}
@@ -178,7 +178,7 @@ const NewDataForm: FC<NewDataProps> = memo(
 
                   <p>* - required fields</p>
                 </div>
-              </form>
+              </Form>
             </div>
           )}
         </Formik>

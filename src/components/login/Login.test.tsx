@@ -1,8 +1,8 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import { renderWithRouterAndProviders } from '../../testHelpers/renderWithRouterAndProviders';
 import Login from '../../pages/login/Login';
-
 
 describe('Login', () => {
   it('title inside the DOM', () => {
@@ -89,14 +89,14 @@ describe('Login', () => {
     expect(screen.getByRole('button', { name: /let's go/i })).toBeInTheDocument();
   });
 
-  // it('reset inputs value', async () => {
-  //   renderWithRouterAndProviders(<Login />);
+  it('reset inputs value', async () => {
+    renderWithRouterAndProviders(<Login />);
 
-  //   await userEvent.type(screen.getByPlaceholderText(/your email/i), 'lksdjfl@ldsfk.ru');
-  //   await userEvent.type(screen.getByPlaceholderText(/your password/i), 'somepassword');
-  //   await userEvent.click(screen.getByRole('button', { name: /let's go/i }));
+    await userEvent.type(screen.getByPlaceholderText(/your email/i), 'lksdjfl@ldsfk.ru');
+    await userEvent.type(screen.getByPlaceholderText(/your password/i), 'somepassword');
+    await userEvent.click(screen.getByRole('button', { name: /let's go/i }));
 
-  //   expect(screen.getByPlaceholderText(/your email/i)).toHaveValue('');
-  //   expect(screen.getByPlaceholderText(/your password/i)).toHaveValue('');
-  // })
+    await waitFor(() => expect(screen.getByPlaceholderText(/your email/i)).toHaveValue(''));
+    await waitFor(() => expect(screen.getByPlaceholderText(/your password/i)).toHaveValue(''));
+  });
 });

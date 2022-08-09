@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as yup from 'yup';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { trueAutorization } from '../../store/slices/isAutorized';
 import { fetchContactsSelector, setCurrentPage } from '../../store/slices/fetchContacts';
 
@@ -50,7 +50,7 @@ const Login: FC = () => {
       }}>
       {({ handleSubmit, values, handleChange }) => (
         <div className='login'>
-          <form className='login__form' onSubmit={handleSubmit}>
+          <Form className='login__form' onSubmit={handleSubmit}>
             <h1 className='login__title'>Log in</h1>
             <InputWithError
               className='login__text'
@@ -75,7 +75,7 @@ const Login: FC = () => {
             <button className='login__submit' type='submit'>
               Let's go
             </button>
-          </form>
+          </Form>
         </div>
       )}
     </Formik>
