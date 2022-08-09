@@ -28,6 +28,7 @@ describe('contact item', () => {
   it('contact avatar is inside the DOM', () => {
     renderWithProviders(<ContactItem contact={testContact} deleteContact={testFunction} />);
     expect(screen.getByAltText(/contactAvatar/i)).toBeInTheDocument();
+    expect(screen.getByAltText(/contactAvatar/i)).toHaveAttribute('src');
   });
 
   it('contact info is inside the DOM', () => {

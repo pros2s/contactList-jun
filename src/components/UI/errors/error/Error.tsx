@@ -15,12 +15,12 @@ const Error: FC<ErrorProps> = ({ message }) => {
 
 
   return (
-    <div className='fetch-error'>
+    <div data-testid='error' className='fetch-error'>
       <img className='fetch-error__img' src={error} alt='error message' />
       <h1 className='fetch-error__title'>{message}</h1>
-      <div className="fetch-error__to-login">
-        <p>You can back to login page</p>
-        <RiLoginBoxLine onClick={() => navigate('/login')} />
+      <div data-testid='errorGoBack' className="fetch-error__to-login">
+        <p>You can go back to login page</p>
+        <RiLoginBoxLine data-testid='errorGoBackSVG' onClick={() => navigate('/login')} />
       </div>
     </div>
   );
