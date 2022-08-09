@@ -14,7 +14,7 @@ import { setContactNewValues } from '../../store/slices/addContact';
 
 import { ADD_NEW_CONTACT, EDIT_CONTACT } from '../../store/sagas/sagasHelpers/variables';
 import { IContact, NewData } from '../../types/contacts';
-import InputWithError from './InputWithError';
+import InputWithError from './inputWithError/InputWithError';
 
 import '../addNewContactMenu/addNewContactMenu.scss';
 import picture from '../../assets/contact.png';

@@ -2,7 +2,7 @@ import { ErrorMessage } from 'formik';
 import { FC, memo } from 'react';
 
 
-interface InputProps {
+export interface InputProps {
   name: string;
   type: string;
   maxLength?: number;
@@ -33,7 +33,7 @@ const InputWithError: FC<InputProps> = memo(({
   onChange,
 }) => {
   return (
-    <div className={className}>
+    <div data-testid='inputWithError' className={className}>
       <input
         maxLength={maxLength}
         type={type}

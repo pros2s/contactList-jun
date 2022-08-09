@@ -9,7 +9,7 @@ import { fetchContactsSelector, setCurrentPage } from '../../store/slices/fetchC
 import { useTypedDispatch } from '../../hooks/useTypedDispatch';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-import InputWithError from '../../components/UI/InputWithError';
+import InputWithError from '../UI/inputWithError/InputWithError';
 
 import './login.scss';
 
