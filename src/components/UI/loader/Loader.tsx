@@ -11,7 +11,7 @@ interface LoaderProps {
 
 const Loader: FC<LoaderProps> = memo(({ info, width = '60' }) => {
   return (
-    <div className='loader'>
+    <div data-testid='loader' className='loader'>
       <RotatingLines strokeColor='white' strokeWidth='5' width={width} visible={true} />
       <h3>{info}...</h3>
     </div>
