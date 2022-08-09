@@ -8,7 +8,7 @@ import './logout.scss';
 const Logout: FC = () => {
   return (
     <Link data-text='logout' className='logout' to='/login'>
-      <RiLogoutCircleRLine/>
+      <RiLogoutCircleRLine data-testid='logoutSVG' />
     </Link>
   );
 };
