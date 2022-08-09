@@ -9,7 +9,7 @@ import { addedContactSelector, resetAdditingError } from '../../store/slices/add
 import { fetchContactsSelector } from '../../store/slices/fetchContacts';
 import ErrorMini from '../UI/errors/errorMini/ErrorMini';
 import Loader from '../UI/loader/Loader';
-import NewDataForm from '../UI/NewDataForm';
+import NewDataForm from '../UI/newDataForm/NewDataForm';
 
 import { NewData } from '../../types/contacts';
 

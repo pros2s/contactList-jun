@@ -5,22 +5,22 @@ import { RiCloseLine, RiAddLine, RiEdit2Line } from 'react-icons/ri';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 
-import { useTypedDispatch } from '../../hooks/useTypedDispatch';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useTypedDispatch } from '../../../hooks/useTypedDispatch';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
-import { setEditedContactId, setEditedContactValues } from '../../store/slices/editContact';
-import { fetchContactsSelector, setCurrentPage } from '../../store/slices/fetchContacts';
-import { setContactNewValues } from '../../store/slices/addContact';
+import { setEditedContactId, setEditedContactValues } from '../../../store/slices/editContact';
+import { fetchContactsSelector, setCurrentPage } from '../../../store/slices/fetchContacts';
+import { setContactNewValues } from '../../../store/slices/addContact';
 
-import { ADD_NEW_CONTACT, EDIT_CONTACT } from '../../store/sagas/sagasHelpers/variables';
-import { IContact, NewData } from '../../types/contacts';
-import InputWithError from './inputWithError/InputWithError';
+import { ADD_NEW_CONTACT, EDIT_CONTACT } from '../../../store/sagas/sagasHelpers/variables';
+import { IContact, NewData } from '../../../types/contacts';
+import InputWithError from '../inputWithError/InputWithError';
 
-import '../addNewContactMenu/addNewContactMenu.scss';
-import picture from '../../assets/contact.png';
+import '../../addNewContactMenu/addNewContactMenu.scss';
+import picture from '../../../assets/contact.png';
 
 
-interface NewDataProps {
+export interface NewDataProps {
   payloadType: string;
   setViewForm: React.Dispatch<React.SetStateAction<boolean>>;
   contactId?: string;
@@ -31,7 +31,6 @@ const NewDataForm: FC<NewDataProps> = memo(
   ({ payloadType, setViewForm, contactId, initialValues }) => {
     const dispatch = useTypedDispatch();
     const { contacts, totalPages, currentPage } = useTypedSelector(fetchContactsSelector);
-
 
     const formValidation = yup.object({
       email: yup
@@ -75,7 +74,9 @@ const NewDataForm: FC<NewDataProps> = memo(
         dispatch(setEditedContactValues(newValues));
       } else if (payloadType === ADD_NEW_CONTACT) {
         dispatch(setContactNewValues(newValues));
-        contacts.length === 5 && totalPages.toString() === currentPage && dispatch(setCurrentPage(`${totalPages + 1}`));
+        contacts.length === 5 &&
+          totalPages.toString() === currentPage &&
+          dispatch(setCurrentPage(`${totalPages + 1}`));
       }
       dispatch({ type: payloadType });
 
@@ -84,17 +85,16 @@ const NewDataForm: FC<NewDataProps> = memo(
 
     const buttonDataText = (): string => {
       if (payloadType === EDIT_CONTACT) {
-        return 'edit'
+        return 'edit';
       } else if (payloadType === ADD_NEW_CONTACT) {
-        return 'add'
+        return 'add';
       }
 
       return '';
     };
 
-
     return (
-      <div className='new-data-form' onClick={(e) => e.stopPropagation()}>
+      <div data-testid='newDataForm' className='new-data-form' onClick={(e) => e.stopPropagation()}>
         <Formik<NewData>
           initialValues={initialValues}
           validationSchema={formValidation}
@@ -170,10 +170,14 @@ const NewDataForm: FC<NewDataProps> = memo(
                   onChange={handleChange}
                 />
 
-                <div className='new-data__footer'>
-                  <button data-text={buttonDataText()} className='new-data__submit' type='submit'>
-                    {payloadType === ADD_NEW_CONTACT && <RiAddLine />}
-                    {payloadType === EDIT_CONTACT && <RiEdit2Line />}
+                <div data-testid='newDataFooter' className='new-data__footer'>
+                  <button
+                    data-testid='newDataFooterButton'
+                    data-text={buttonDataText()}
+                    className='new-data__submit'
+                    type='submit'>
+                      {payloadType === ADD_NEW_CONTACT && <RiAddLine />}
+                      {payloadType === EDIT_CONTACT && <RiEdit2Line />}
                   </button>
 
                   <p>* - required fields</p>
@@ -183,8 +187,13 @@ const NewDataForm: FC<NewDataProps> = memo(
           )}
         </Formik>
 
-        <button data-text='close' className='new-data__close' type='submit' onClick={() => setViewForm(false)}>
-          <RiCloseLine />
+        <button
+          data-testid='closeNewDataForm'
+          data-text='close'
+          className='new-data__close'
+          type='submit'
+          onClick={() => setViewForm(false)}>
+            <RiCloseLine />
         </button>
       </div>
     );

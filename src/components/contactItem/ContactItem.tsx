@@ -4,7 +4,7 @@ import { RiCloseLine, RiDeleteBin4Fill, RiEdit2Fill } from 'react-icons/ri';
 import { EDIT_CONTACT } from '../../store/sagas/sagasHelpers/variables';
 import { IContact, NewData } from '../../types/contacts';
 
-import NewDataForm from '../UI/NewDataForm';
+import NewDataForm from '../UI/newDataForm/NewDataForm';
 import ErrorMini from '../UI/errors/errorMini/ErrorMini';
 import Loader from '../UI/loader/Loader';
 
