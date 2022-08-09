@@ -40,7 +40,7 @@ const ContactList: FC = () => {
   });
 
   return (
-    <div className='contacts'>
+    <div data-testid='contacts' className='contacts'>
       {loading ? (
         <Loader info='Loading Contacts' />
       ) : (
