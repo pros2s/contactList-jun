@@ -1,46 +1,24 @@
-import React, { PropsWithChildren } from 'react';
-import { render } from '@testing-library/react';
-import type { RenderOptions } from '@testing-library/react';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import type { PreloadedState } from '@reduxjs/toolkit';
+import { JSXElementConstructor, ReactElement } from 'react';
+import { render as rtlRender } from '@testing-library/react';
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-
-import type { RootState } from '../store/store';
-import isAutorizedReducer from '../store/slices/isAutorized';
+import { persistedReducer } from '../store/rootReducer';
 
 
-const persistConfig = {
-  key: 'root',
-  version: 1,
-  storage,
-};
-
-const rootReducer = combineReducers({
-  isAutorizedReducer,
-});
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const store = configureStore({ reducer: persistedReducer });
-interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
-  preloadedState?: PreloadedState<RootState>;
-  store?: typeof store;
+interface WrapperProps {
+  children?: React.ReactNode;
 }
 
 export const renderWithProviders = (
-  ui: React.ReactElement,
-  {
-    preloadedState = {},
-    store = configureStore({ reducer: persistedReducer, preloadedState }),
-    ...renderOptions
-  }: ExtendedRenderOptions = {},
+  ui: ReactElement<any, string | JSXElementConstructor<any>>,
+  initialState = {},
 ) => {
-  function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
-    return <Provider store={store}>{children}</Provider>;
-  }
+  const store = configureStore({ reducer: persistedReducer, preloadedState: initialState });
 
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
-}
+  const Wrapper = ({ children }: WrapperProps) => {
+    return <Provider store={store}>{children}</Provider>;
+  };
+
+  return rtlRender(ui, { wrapper: Wrapper });
+};
