@@ -10,7 +10,7 @@ import callAPI from './sagasHelpers/api';
 import { DELETE_CONTACT, GET_CONTACTS } from './sagasHelpers/variables';
 
 
-export function* workerDeleteContact() {
+function* workerDeleteContact() {
   try {
     yield put(deletingContacts());
     const { deletedContactReducer } = yield select();
@@ -27,7 +27,7 @@ export function* workerDeleteContact() {
   }
 }
 
-export function* watcherDeleteContact() {
+function* watcherDeleteContact() {
   yield takeLatest(DELETE_CONTACT, workerDeleteContact);
 }
 
