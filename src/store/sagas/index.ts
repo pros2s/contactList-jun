@@ -1,4 +1,4 @@
-import { all, call, spawn,  } from 'redux-saga/effects';
+import { all, spawn,  } from 'redux-saga/effects';
 import addRoot from './addContact';
 
 import deleteRoot from './deleteContact';
@@ -7,20 +7,10 @@ import requestRoot from './pageLoader';
 
 
 export default function* rootSaga() {
-  const sagas = [requestRoot, deleteRoot, addRoot, editRoot];
-
-  const repeatSagas: any[] = yield sagas.map((saga) => {
-    return spawn(function* () {
-      while (true) {
-        try {
-          yield call(saga);
-          break;
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    });
-  });
-
-  yield all(repeatSagas);
+  yield all([
+    spawn(requestRoot),
+    spawn(deleteRoot),
+    spawn(addRoot),
+    spawn(editRoot)
+  ]);
 }

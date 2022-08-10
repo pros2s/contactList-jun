@@ -13,12 +13,12 @@ import { fetchContactsSelector, setCurrentPage } from '../../../store/slices/fet
 import { setContactNewValues } from '../../../store/slices/addContact';
 
 import { ADD_NEW_CONTACT, EDIT_CONTACT } from '../../../store/sagas/sagasHelpers/variables';
-import { IContact, NewData } from '../../../types/contacts';
+import { NewData } from '../../../types/newData';
+import { IContact } from '../../../types/contacts';
 import InputWithError from '../inputWithError/InputWithError';
 
 import '../../addNewContactMenu/addNewContactMenu.scss';
 import picture from '../../../assets/contact.png';
-
 
 export interface NewDataProps {
   payloadType: string;
@@ -77,6 +77,8 @@ const NewDataForm: FC<NewDataProps> = memo(
         contacts.length === 5 &&
           totalPages.toString() === currentPage &&
           dispatch(setCurrentPage(`${totalPages + 1}`));
+
+        contacts.length === 1 && dispatch(setCurrentPage(`${totalPages}`));
       }
       dispatch({ type: payloadType });
 
@@ -176,8 +178,8 @@ const NewDataForm: FC<NewDataProps> = memo(
                     data-text={buttonDataText()}
                     className='new-data__submit'
                     type='submit'>
-                      {payloadType === ADD_NEW_CONTACT && <RiAddLine />}
-                      {payloadType === EDIT_CONTACT && <RiEdit2Line />}
+                    {payloadType === ADD_NEW_CONTACT && <RiAddLine />}
+                    {payloadType === EDIT_CONTACT && <RiEdit2Line />}
                   </button>
 
                   <p>* - required fields</p>
@@ -193,12 +195,11 @@ const NewDataForm: FC<NewDataProps> = memo(
           className='new-data__close'
           type='submit'
           onClick={() => setViewForm(false)}>
-            <RiCloseLine />
+          <RiCloseLine />
         </button>
       </div>
     );
   },
 );
-
 
 export default NewDataForm;

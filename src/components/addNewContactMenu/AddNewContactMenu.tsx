@@ -11,7 +11,7 @@ import ErrorMini from '../UI/errors/errorMini/ErrorMini';
 import Loader from '../UI/loader/Loader';
 import NewDataForm from '../UI/newDataForm/NewDataForm';
 
-import { NewData } from '../../types/contacts';
+import { NewData } from '../../types/newData';
 
 import './addNewContactMenu.scss';
 
